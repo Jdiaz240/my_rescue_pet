@@ -55,8 +55,8 @@ export const deleteBook = (bookId, token) => {
 
 //request access token from petfinder
 export const getAccessToken = () => {
-  var clientId = "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx";
-  var clientSecret = "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT";
+  var clientId = "kk7M1NT7HyX0oNo7TMjCfQ217d8KOKeySWX7mgUO5nh8SD3XxE";
+  var clientSecret = "oDGbY9YtA6XfDpEkRaIU18KTR7slPrmoan3JCAkZ";
   let formData = new FormData();
   formData.append("grant_type", "client_credentials");
   formData.append("client_id", clientId);
@@ -68,7 +68,7 @@ export const getAccessToken = () => {
   );
 };
 
-export const searchPets = () => {
+export const searchPets = () => { 
   let tokenResponse = await getAccessToken();
   const response = await tokenResponse.json();
   let accessToken = response["access_token"];
