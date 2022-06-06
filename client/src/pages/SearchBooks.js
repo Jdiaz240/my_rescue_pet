@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { getAccessToken } from '../utils/API';
+import { searchPets } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { SAVE_BOOK  } from '../utils/mutations';
 
@@ -34,23 +34,50 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await getAccessToken(searchInput);
+      const response = await searchPets();
       
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
-
-      const bookData = items.map((book) => ({
-        bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      const { animals } = await response.json();
+console.log(animals);
+      const animalData = animals.map((animal) => ({
+// age: "Young"
+// attributes: {spayed_neutered: false, house_trained: false, declawed: null, special_needs: false, shots_current: false}
+// breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
+// coat: null
+// colors: {primary: null, secondary: null, tertiary: null}
+// contact: {email: null, phone: '(602) 506-2765', address: {…}}
+// description: null
+// distance: null
+// environment: {children: null, dogs: null, cats: null}
+// gender: "Male"
+// id: 55818720
+// name: "MODELO"
+// organization_animal_id: "A4744124"
+// organization_id: "AZ101"
+// photos: []
+// primary_photo_cropped: null
+// published_at: "2022-06-06T03:18:48+0000"
+// size: "Large"
+// species: "Dog"
+// status: "adoptable"
+// status_changed_at: "2022-06-06T03:18:48+0000"
+// tags: []
+// type: "Dog"
+// url: "https://www.petfinder.com/dog/modelo-55818720/az/phoenix/mcacc-west-valley-animal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
+// videos: []
+// _links: {self: {…}, type: {…}, organization: {…}}
+// [[Prototype]]: Object
+        // bookId: book.id,
+        // authors: book.volumeInfo.authors || ['No author to display'],
+        // title: book.volumeInfo.title,
+        // description: book.volumeInfo.description,
+        // image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
 
-      setSearchedBooks(bookData);
+      setSearchedBooks(animalData);
       setSearchInput('');
     } catch (err) {
       console.error(err);
