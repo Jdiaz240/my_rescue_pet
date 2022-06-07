@@ -48,10 +48,7 @@ function App() {
             path='/saved' 
             element={<SavedPets />} 
           />
-          <Route 
-            path='/mydashboard' 
-            element={<Dashboard />} 
-          />
+          
           <Route 
             path='*'
             element={<h1 className='display-2'>Wrong page!</h1>}
