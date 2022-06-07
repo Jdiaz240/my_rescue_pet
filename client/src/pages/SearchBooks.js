@@ -71,6 +71,11 @@ const SearchBooks = () => {
         breed: animal.breeds.primary,
         type: animal.type,
         name: animal.name,
+        contact: animal.contact ? animal.contact.email : null,
+        phone: animal.contact ? animal.contact.phone : null,
+        address: animal.contact.postcode,
+        gender: animal.gender,
+        status: animal.status,
         description: animal.description,
         photo: animal.primary_photo_cropped ? animal.primary_photo_cropped.small : null,
       }));
@@ -161,7 +166,7 @@ const SearchBooks = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{animal.name}</Card.Title>
-                  <p className='small'>Authors: {animal.authors}</p>
+                  <p className='small'>Breed: {animal.breed}</p>
                   <Card.Text>{animal.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
@@ -169,8 +174,8 @@ const SearchBooks = () => {
                       className='btn-block btn-info'
                       onClick={() => handleSaveBook(animal.petId)}>
                       {savedBookIds?.some((savedBookId) => savedBookId === animal.petId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
+                        ? 'This pet has already been saved!'
+                        : 'Save this Pet!'}
                     </Button>
                   )}
                 </Card.Body>
