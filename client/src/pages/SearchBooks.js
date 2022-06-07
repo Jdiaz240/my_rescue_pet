@@ -4,13 +4,13 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row } from 
 
 import Auth from '../utils/auth';
 // import { searchPets } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { SAVE_BOOK } from '../utils/mutations';
+import { savePetIds, getSavedPetIds } from '../utils/localStorage';
+import { SAVE_PET } from '../utils/mutations';
 
 const petfinder = require("@petfinder/petfinder-js");
 const client = new petfinder.Client({apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT"});
 
-const SearchBooks = () => {
+const SearchPets = () => {
   // create state for holding returned google api data
   const [searchedPets, setSearchedPets] = useState([]);
   // create state for holding our search field data
@@ -18,16 +18,16 @@ const SearchBooks = () => {
   const [searchLocation, setSearchLocation] = useState('');
 
   // create state to hold saved petId values
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  const [savedPetIds, setSavedPetIds] = useState(getSavedPetIds());
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () => saveBookIds(savedBookIds);
+    return () => savePetIds(savedPetIds);
   });
 
   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  const [savePet, { error }] = useMutation(SAVE_PET);
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -91,9 +91,9 @@ const SearchBooks = () => {
   };
 
   // create function to handle saving a book to our database
-  const handleSaveBook = async (petId) => {
+  const handleSavePet = async (petId) => {
     // find the book in `searchedPets` state by the matching id
-    const bookToSave = searchedPets.find((book) => book.petId === petId);
+    const bookToSave = searchedPets.find((pet) => pet.petId === petId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -103,12 +103,12 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBook({
-        variables: { newBook: { ...bookToSave } },
+      const { data } = await savePet({
+        variables: { newPet: { ...petToSave } },
       });
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.petId]);
+      setSavedPetIds([...savedPetIds, petToSave.petId]);
     } catch (err) {
       console.error(err);
     }
@@ -170,12 +170,12 @@ const SearchBooks = () => {
                   <Card.Text>{animal.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some((savedBookId) => savedBookId === animal.petId)}
+                      disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}
                       className='btn-block btn-info'
-                      onClick={() => handleSaveBook(animal.petId)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === animal.petId)
-                        ? 'This pet has already been saved!'
-                        : 'Save this Pet!'}
+                      onClick={() => handleSavePet(animal.petId)}>
+                      {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
+                        ? 'This book has already been saved!'
+                        : 'Save this Book!'}
                     </Button>
                   )}
                 </Card.Body>
@@ -188,4 +188,4 @@ const SearchBooks = () => {
   );
 };
 
-export default SearchBooks;
+export default SearchPets;

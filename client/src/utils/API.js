@@ -32,7 +32,7 @@ export const loginUser = (userData) => {
 
 
 // save book data for a logged in user
-export const saveBook = (bookData, token) => {
+export const savePet = (petData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
     headers: {
@@ -44,8 +44,8 @@ export const saveBook = (bookData, token) => {
 };
 
 // remove saved book data for a logged in user
-export const deleteBook = (bookId, token) => {
-  return fetch(`/api/users/books/${bookId}`, {
+export const deletePet = (petId, token) => {
+  return fetch(`/api/users/pets/${petId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
