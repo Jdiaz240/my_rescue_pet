@@ -14,12 +14,12 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_PET = gql`
-  mutation savePet($newPet: InputPet!) {
-    savePet(newPet: $newPet) {
+  mutation SavedPets($newPet: InputPet!) {
+    SavedPets(newPet: $newPet) {
       _id
       username
       email
-      savedPets {
+      SavedPets {
           petId
           authors
           image
@@ -44,12 +44,12 @@ export const LOGIN_USER = gql`
 `;
 
 export const REMOVE_PET = gql`
-  mutation removePet($petId: ID!) {
-    removePet(petId: $petId) {
+  mutation removePetId($petId: ID!) {
+    removePetId(petId: $petId) {
       _id
       username
       email
-      savedPets {
+      SavedPets {
           authors
           description
           petId
