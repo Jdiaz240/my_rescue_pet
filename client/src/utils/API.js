@@ -53,6 +53,6 @@ export const deletePet = (petId, token) => {
   });
 };
 
-export const searchPets = async (animalType, postalCode) => {
+// export const searchPets = async (animalType, postalCode) => {
   
-};
+// };

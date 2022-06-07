@@ -11,7 +11,7 @@ const typeDefs = gql`
 
   type Pet {
     petId: ID!
-    authors: [String]
+    name: String!
     description: String
     image: String
     link: String
