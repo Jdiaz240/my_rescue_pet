@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, Button } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
 import logo from '../../assets/project3_logo.png';
@@ -16,8 +16,8 @@ const AppNavbar = () => {
       <Navbar bg='light' variant='light' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            <img 
-            src={logo}/>
+            <img
+              src={logo} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
@@ -57,6 +57,7 @@ const AppNavbar = () => {
                 <Nav.Item>
                   <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
+
               </Nav>
             </Modal.Title>
           </Modal.Header>
