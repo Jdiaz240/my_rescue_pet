@@ -88,7 +88,7 @@ const SearchPets = () => {
   // create function to handle saving a book to our database
   const handleSavePet = async (petId) => {
     // find the book in `searchedPets` state by the matching id
-    const bookToSave = searchedPets.find((pet) => pet.petId === petId);
+    const petToSave = searchedPets.find((pet) => pet.petId === petId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;

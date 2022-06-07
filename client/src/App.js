@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
-import Dashboard from './pages/Dashboard/Dashboard'
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
