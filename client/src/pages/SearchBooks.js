@@ -5,7 +5,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row } from 
 import Auth from '../utils/auth';
 // import { searchPets } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { SAVE_BOOK  } from '../utils/mutations';
+import { SAVE_BOOK } from '../utils/mutations';
 
 const petfinder = require("@petfinder/petfinder-js");
 const client = new petfinder.Client({apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT"});
@@ -27,7 +27,7 @@ const SearchBooks = () => {
   });
 
   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-  const [saveBook, {error}] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {

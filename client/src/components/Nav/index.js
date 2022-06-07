@@ -16,8 +16,8 @@ const AppNavbar = () => {
       <Navbar bg='light' variant='light' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            <img 
-            src={logo}/>
+            <img
+              src={logo} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
@@ -58,6 +58,7 @@ const AppNavbar = () => {
                 <Nav.Item>
                   <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
+
               </Nav>
             </Modal.Title>
           </Modal.Header>

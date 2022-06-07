@@ -24,7 +24,13 @@ const userSchema = new Schema(
     },
     // set savedPets to be an array of data that adheres to the petSchema
     savedPets: [petSchema],
-    rehomePets: [rehomeSchema],
+    rehome: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Rehome",
+      }
+    ]
+    // rehomePets: [rehomeSchema],
   },
   // set this to use virtual below
   {
