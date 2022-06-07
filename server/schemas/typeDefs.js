@@ -24,7 +24,7 @@ const typeDefs = gql`
     petId: String
     image: String
     link: String
-    authors: [String]
+    name: String
   }
 
   type Auth {
@@ -43,7 +43,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    savePet(newPet: InputPet!): User
+    savedPets(newPet: InputPet!): User
     removePet(petId: ID!): User
   }
 `;
