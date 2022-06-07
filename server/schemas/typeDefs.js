@@ -5,12 +5,12 @@ const typeDefs = gql`
     _id: ID!
     username: String
     email: String
-    bookCount: Int
+    petCount: Int
     savedPets: [Pet]
   }
 
   type Pet {
-    bookId: ID!
+    petId: ID!
     authors: [String]
     description: String
     image: String
@@ -18,10 +18,10 @@ const typeDefs = gql`
     title: String
   }
 
-  input InputBook {
+  input InputPet {
     description: String
     title: String
-    bookId: String
+    petId: String
     image: String
     link: String
     authors: [String]
@@ -43,8 +43,8 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    saveBook(newBook: InputBook!): User
-    removeBook(bookId: ID!): User
+    savePet(newPet: InputPet!): User
+    removePet(petId: ID!): User
   }
 `;
 
