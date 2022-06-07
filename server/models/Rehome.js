@@ -1,4 +1,4 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedPets` array in User.js
 const rehomeSchema = new Schema({
@@ -11,10 +11,10 @@ const rehomeSchema = new Schema({
     required: true,
   },
   // saved pet id from petFinder
-  id: {
-    type: Schema.Types.ObjectId,
-    default: () => new Types.ObjectId(),
-  },
+  // id: {
+  //   type: Schema.Types.ObjectId,
+  //   default: () => new Types.ObjectId(),
+  // },
   photos: {
     type: Array,
   },
@@ -31,4 +31,6 @@ const rehomeSchema = new Schema({
   },
 });
 
-module.exports = rehomeSchema;
+const Rehome = model('Rehome', rehomeSchema);
+
+module.exports = Rehome;

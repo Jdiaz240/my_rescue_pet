@@ -5,7 +5,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 import Auth from '../utils/auth';
 import { searchPets } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { SAVE_BOOK  } from '../utils/mutations';
+import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -23,7 +23,7 @@ const SearchBooks = () => {
   });
 
   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-  const [saveBook, {error}] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -35,41 +35,32 @@ const SearchBooks = () => {
 
     try {
       const response = await searchPets();
-      
+
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
       const { animals } = await response.json();
-console.log(animals);
+      console.log(animals);
       const animalData = animals.map((animal) => ({
-// age: "Young"
-// attributes: {spayed_neutered: false, house_trained: false, declawed: null, special_needs: false, shots_current: false}
-// breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
-// coat: null
-// colors: {primary: null, secondary: null, tertiary: null}
-// contact: {email: null, phone: '(602) 506-2765', address: {…}}
-// description: null
-// distance: null
-// environment: {children: null, dogs: null, cats: null}
-// gender: "Male"
-// id: 55818720
-// name: "MODELO"
-// organization_animal_id: "A4744124"
-// organization_id: "AZ101"
-// photos: []
-// primary_photo_cropped: null
-// published_at: "2022-06-06T03:18:48+0000"
-// size: "Large"
-// species: "Dog"
-// status: "adoptable"
-// status_changed_at: "2022-06-06T03:18:48+0000"
-// tags: []
-// type: "Dog"
-// url: "https://www.petfinder.com/dog/modelo-55818720/az/phoenix/mcacc-west-valley-animal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
-// videos: []
-// _links: {self: {…}, type: {…}, organization: {…}}
-// [[Prototype]]: Object
+        // age: "Young"
+        // breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
+        //mixed breed checkbox/pure bred
+        // contact: {email: null, phone: '(602) 506-2765', address: {…}}
+        // gender: "Male"
+        // id: 55818720
+        // name: "MODELO"
+        // primary_photo_cropped: medium
+        // published_at: "date.now"
+        // size: "Large"
+        // species: "Dog"
+        // status: "adoptable"
+        // status_changed_at: "2022-06-06T03:18:48+0000"
+        // tags: []
+        // type: "Dog"
+        // url: "https://www.petfinder.com/dog/modelo-55818720/az/phoenix/mcacc-west-valley-animal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
+        // _links: {self: {…}, type: {…}, organization: {…}}
+        // [[Prototype]]: Object
         // bookId: book.id,
         // authors: book.volumeInfo.authors || ['No author to display'],
         // title: book.volumeInfo.title,
