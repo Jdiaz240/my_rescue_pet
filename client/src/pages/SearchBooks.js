@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchPets } from '../utils/API';
+// import { searchPets } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { SAVE_BOOK } from '../utils/mutations';
 
+const petfinder = require("@petfinder/petfinder-js");
+const client = new petfinder.Client({apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT"});
+
 const SearchBooks = () => {
   // create state for holding returned google api data
-  const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchedPets, setSearchedPets] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchType, setSearchType] = useState('');
+  const [searchLocation, setSearchLocation] = useState('');
 
-  // create state to hold saved bookId values
+  // create state to hold saved petId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -29,56 +33,62 @@ const SearchBooks = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!searchInput) {
+    if (!searchType || !searchLocation) {
       return false;
     }
 
     try {
-      const response = await searchPets();
+      client.animal.search({
+        type: searchType,
+        location: searchLocation,
+        limit: 25,
+      }).then(resp => {
+       const animals = resp.data.animals;
+       console.log(animals);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+// response.body example:
 
-      const { animals } = await response.json();
-      console.log(animals);
+// age: "Young"
+// breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
+ //checkbox for mixed or purebred
+// contact: {email: null, phone: '(602) 506-2765', address: {postcode}}}
+// gender: "Male"
+// id: 55818720
+// name: "MODELO"
+// primary_photo_cropped: {medium}
+// published_at: "2022-06-06T03:18:48+0000"
+// size: "Large"
+// species: "Dog"
+// status: "adoptable"
+// -- status_changed_at: "2022-06-06T03:18:48+0000"
+// url: "https://www.petfinder.com/dog/modelo-55818720/az//mcacc-west-valley-anphoeniximal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
+// [[Prototype]]: Object
+
+// iterate over results and create array of hashes (objects) that match model attributes
+
       const animalData = animals.map((animal) => ({
-        // age: "Young"
-        // breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
-        //mixed breed checkbox/pure bred
-        // contact: {email: null, phone: '(602) 506-2765', address: {…}}
-        // gender: "Male"
-        // id: 55818720
-        // name: "MODELO"
-        // primary_photo_cropped: medium
-        // published_at: "date.now"
-        // size: "Large"
-        // species: "Dog"
-        // status: "adoptable"
-        // status_changed_at: "2022-06-06T03:18:48+0000"
-        // tags: []
-        // type: "Dog"
-        // url: "https://www.petfinder.com/dog/modelo-55818720/az/phoenix/mcacc-west-valley-animal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
-        // _links: {self: {…}, type: {…}, organization: {…}}
-        // [[Prototype]]: Object
-        // bookId: book.id,
-        // authors: book.volumeInfo.authors || ['No author to display'],
-        // title: book.volumeInfo.title,
-        // description: book.volumeInfo.description,
-        // image: book.volumeInfo.imageLinks?.thumbnail || '',
+        petId: animal.id,
+        breed: animal.breeds.primary,
+        type: animal.type,
+        name: animal.name,
+        description: animal.description,
+        photo: animal.primary_photo_cropped ? animal.primary_photo_cropped.small : null,
       }));
 
-      setSearchedBooks(animalData);
-      setSearchInput('');
+
+        setSearchedPets(animalData);
+        setSearchType('');
+        setSearchLocation('');
+      });      
     } catch (err) {
       console.error(err);
     }
   };
 
   // create function to handle saving a book to our database
-  const handleSaveBook = async (bookId) => {
-    // find the book in `searchedBooks` state by the matching id
-    const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+  const handleSaveBook = async (petId) => {
+    // find the book in `searchedPets` state by the matching id
+    const bookToSave = searchedPets.find((book) => book.petId === petId);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -93,7 +103,7 @@ const SearchBooks = () => {
       });
 
       // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      setSavedBookIds([...savedBookIds, bookToSave.petId]);
     } catch (err) {
       console.error(err);
     }
@@ -103,52 +113,62 @@ const SearchBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h4>Find your next best friend!</h4>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
+            <Row>
+              <Col xs={5}>
                 <Form.Control
-                  name='searchInput'
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
+                  name='searchType'
+                  value={searchType}
+                  onChange={(e) => setSearchType(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a pet type'
+                />
+                 </Col>
+                 <Col>
+                <Form.Control
+                  name='searchLocation'
+                  value={searchLocation}
+                  onChange={(e) => setSearchLocation(e.target.value)}
+                  type='text'
+                  size='lg'
+                  placeholder='Search in a location (city, state, postal code)'
                 />
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={10} md={4}>
                 <Button type='submit' variant='success' size='lg'>
                   Submit Search
                 </Button>
               </Col>
-            </Form.Row>
+            </Row>
           </Form>
         </Container>
       </Jumbotron>
 
       <Container>
         <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
+          {searchedPets.length
+            ? `Viewing ${searchedPets.length} results:`
             : 'Search for a book to begin'}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedPets.map((animal) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? (
-                  <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
+              <Card key={animal.animalId} border='dark'>
+                {animal.photo ? (
+                  <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Title>{animal.name}</Card.Title>
+                  <p className='small'>Authors: {animal.authors}</p>
+                  <Card.Text>{animal.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                      disabled={savedBookIds?.some((savedBookId) => savedBookId === animal.petId)}
                       className='btn-block btn-info'
-                      onClick={() => handleSaveBook(book.bookId)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
+                      onClick={() => handleSaveBook(animal.petId)}>
+                      {savedBookIds?.some((savedBookId) => savedBookId === animal.petId)
                         ? 'This book has already been saved!'
                         : 'Save this Book!'}
                     </Button>
