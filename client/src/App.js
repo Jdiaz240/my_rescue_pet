@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,6 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Home from './pages/Home';
 import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
@@ -42,6 +44,10 @@ function App() {
         <Routes>
           <Route 
             path='/' 
+            element={<Home />} 
+          />
+          <Route 
+            path='/search' 
             element={<SearchPets />} 
           />
           <Route 
