@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,6 +14,8 @@ import './components/Nav/index.css'
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
 import SearchPets from './pages/SearchPets'
+import Footer from './components/Footer/index'
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -41,6 +44,7 @@ function App() {
     <Router>
         <Navbar />
         <Routes>
+        
           <Route 
             path='/' 
             element={<Home />} 
@@ -55,6 +59,7 @@ function App() {
             element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
+        <Footer />
     </Router>
     </ApolloProvider>
   );

@@ -38,9 +38,9 @@ const SavedPets = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid id='jumbo1' className='text-light'>
         <Container>
-          <h1>Viewing saved pets!</h1>
+          <h1 >Viewing saved pets!</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -52,10 +52,10 @@ const SavedPets = () => {
         <CardColumns>
           {userData.savedPets.map((pet) => {
             return (
-              <Card key={pet.petId}>
+              <Card id='space1' className="saved-cards" key={pet.petId} border='dark'>
                 {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title>{pet.title}</Card.Title>
+                  <Card.Title >{pet.title}</Card.Title>
                   <p className='small'>User: {pet.users}</p>
                   <Card.Text>{pet.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>
