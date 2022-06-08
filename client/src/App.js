@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css'
+import './App.css';
+import './pages/SearchPets.css';
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,12 +9,12 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './pages/home.css'
 import './components/Nav/index.css'
 
+import Home from './pages/Home';
+import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
-import SearchPets from './pages/SearchPets'
 import Footer from './components/Footer/index'
 
 
@@ -48,6 +49,10 @@ function App() {
           <Route 
             path='/' 
             element={<Home />} 
+          />
+          <Route 
+            path='/search' 
+            element={<SearchPets />} 
           />
           <Route 
             path='/saved' 
