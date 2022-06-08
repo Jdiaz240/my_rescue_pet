@@ -18,6 +18,10 @@
   "dependencies": {
     "@petfinder/petfinder-js": "^1.0.6",
     "apollo-server": "^3.8.2",
-    "graphql": "^16.5.0"
+    "graphql": "^16.5.0",
+    "mdb-react-ui-kit": "^3.0.0",
+    "@fortawesome/free-brands-svg-icons":"^6.1.1",
+    "@fortawesome/free-solid-svg-icons":"^6.1.1",
+    "@fortawesome/react-fontawesome":"^0.1.18"
   }
 }

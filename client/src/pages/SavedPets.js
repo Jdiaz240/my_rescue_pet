@@ -2,8 +2,8 @@ import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-import { removePetId } from '../utils/localStorage';
 import { GET_ME } from "../utils/queries";
+import { RemovePetId } from '../utils/localStorage';
 import { REMOVE_PET } from "../utils/mutations";
 
 const SavedPets = () => {
@@ -26,7 +26,7 @@ const SavedPets = () => {
       });
 
       // upon success, remove book's id from localStorage
-      removePetId(petId);
+      RemovePetId(petId);
     } catch (err) {
       console.error(err);
     }
@@ -39,9 +39,9 @@ const SavedPets = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid id='jumbo1' className='text-light'>
         <Container>
-          <h1>Viewing saved pets!</h1>
+          <h1 >Viewing saved pets!</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -53,10 +53,10 @@ const SavedPets = () => {
         <CardColumns>
           {userData.savedPets.map((pet) => {
             return (
-              <Card key={pet.petId} border='dark'>
+              <Card id='space1' className="saved-cards" key={pet.petId} border='dark'>
                 {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title>{pet.title}</Card.Title>
+                  <Card.Title >{pet.title}</Card.Title>
                   <p className='small'>User: {pet.users}</p>
                   <Card.Text>{pet.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>
