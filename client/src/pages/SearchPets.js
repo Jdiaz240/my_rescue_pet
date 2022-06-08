@@ -141,7 +141,7 @@ const SearchPets = () => {
         <CardColumns>
           {searchedPets.map((animal) => {
             return (
-              <Card key={animal.animalId} border='dark'>
+              <Card  key={animal.animalId} border='dark'>
                 {animal.photo ? (
                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
                 ) : null}

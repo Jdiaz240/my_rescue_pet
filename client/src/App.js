@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'
 import {
   ApolloClient,
   InMemoryCache,
@@ -11,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
+import Footer from './components/Footer/index'
 
 
 const httpLink = createHttpLink({
@@ -40,6 +42,7 @@ function App() {
     <Router>
         <Navbar />
         <Routes>
+        
           <Route 
             path='/' 
             element={<SearchPets />} 
@@ -54,6 +57,7 @@ function App() {
             element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
+        <Footer />
     </Router>
     </ApolloProvider>
   );

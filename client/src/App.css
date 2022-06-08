@@ -1,0 +1,22 @@
+.saved-cards {
+    box-shadow: 10px 10px 10px grey;
+    
+ 
+}
+
+#jumbo1 {
+    background-color: #66B032 !important;
+    border-top: 5px solid #FB607F;
+    border-bottom: 5px solid #FB607F;
+  
+}
+
+#footer-main {
+    background-color: #66B032 !important ;
+    border-top: 5px solid #FB607F;
+}
+
+.icons {
+    font-size: 40px;
+   color:#FB607F
+}
