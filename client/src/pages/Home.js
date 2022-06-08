@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row } from 'react-bootstrap';
-
+import  Results  from './Results';
 import Auth from '../utils/auth';
 // import { searchPets } from '../utils/API';
 import { savePetIds, getSavedPetIds } from '../utils/localStorage';
@@ -137,49 +137,18 @@ const SearchPets = () => {
                 />
               </Col>
               <Col xs={10} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button onclick={Results} type='submit' variant='success' size='lg'>
                   Submit Search
-                </Button>
+                </Button>                
               </Col>
             </Row>
           </Form>
         </Container>
       </Jumbotron>
-
-      <Container>
-        <h2>
-          {searchedPets.length
-            ? `Viewing ${searchedPets.length} results:`
-            : 'Search for a book to begin'}
-        </h2>
-        <CardColumns>
-          {searchedPets.map((animal) => {
-            return (
-              <Card key={animal.animalId} border='dark'>
-                {animal.photo ? (
-                  <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{animal.name}</Card.Title>
-                  <p className='small'>Authors: {animal.authors}</p>
-                  <Card.Text>{animal.description}</Card.Text>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}
-                      className='btn-block btn-info'
-                      onClick={() => handleSavePet(animal.petId)}>
-                      {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns>
-      </Container>
-    </>
+      {/* new section that contains carisoul */}
+      {/* carisoul has see more button */}
+      {/* search bar has onClick that hides carisoul and shows results */}
+      </>
   );
 };
 

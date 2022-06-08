@@ -13,6 +13,9 @@ export const ADD_USER = gql`
   }
 `;
 
+export const SAVE_MY_PET = gql`
+  mustation saveMyPet`
+
 export const SAVE_PET = gql`
   mutation SavedPets($newPet: InputPet!) {
     SavedPets(newPet: $newPet) {
