@@ -14,6 +14,7 @@ const petSchema = new Schema({
   // saved pet id from petFinder
   petId: {
     type: String,
+    required: true,
   },
   photo: {
     type: String,
@@ -24,17 +25,26 @@ const petSchema = new Schema({
   }, 
 
   contact: {
-    email: String,
-    phone: String,
-    address: {
-      postcode: String,
-    },
+    type: String,
   },
+
+  phone: {
+    type: String,
+  },
+
+  address: {
+    type: String,
+  },
+
   age: { 
     type: String, 
   },
   breed: {
-    primary: String,
+    type: String,
+  },
+
+  gender: {
+    type: String,
   },
 
   status: {

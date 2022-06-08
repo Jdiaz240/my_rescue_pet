@@ -10,21 +10,35 @@ const typeDefs = gql`
   }
 
   type Pet {
-    petId: ID!
     name: String!
+    petId: ID!
+    photo: String
+    status: String
+    breed: String
     description: String
-    image: String
-    link: String
-    title: String
+    age: String
+    contact: String
+    phone: String
+    gender: String
+    address: String
+    type: String
+    userId: String
   }
 
   input InputPet {
-    description: String
-    title: String
-    petId: String
-    image: String
-    link: String
+    photo: String
     name: String
+    petId: String
+    status: String
+    breed: String
+    description: String
+    age: String
+    contact: String
+    phone: String
+    gender: String
+    address: String
+    type: String
+    userId: String
   }
 
   type Auth {
@@ -43,7 +57,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
 
-    savedPets(newPet: InputPet!): User
+    savePet(newPet: InputPet!): User
     removePet(petId: ID!): User
   }
 `;

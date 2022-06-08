@@ -39,7 +39,7 @@ export const savePet = (petData, token) => {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(bookData),
+    body: JSON.stringify(petData),
   });
 };
 
