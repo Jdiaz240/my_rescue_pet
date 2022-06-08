@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
+import Donate from './Donation/Donate'
 
 
 const httpLink = createHttpLink({
@@ -47,6 +48,10 @@ function App() {
           <Route 
             path='/saved' 
             element={<SavedPets />} 
+          />
+          <Route 
+            path='/Donate' 
+            element={<Donate />} 
           />
           
           <Route 
