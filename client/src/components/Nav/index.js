@@ -14,7 +14,7 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar bg='light' variant='light' expand='lg'>
-        <Container fluid>
+        <Container fluid className='navbar'>
           <Navbar.Brand as={Link} to='/'>
             <img
               src={logo} />
@@ -22,7 +22,7 @@ const AppNavbar = () => {
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/'>
+              <Nav.Link as={Link} to='/search'>
                 Search For Pets
               </Nav.Link>
               {/* if user is logged in show favorite pets and logout */}

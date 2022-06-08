@@ -14,7 +14,7 @@ export const savePetIds = (petIdArr) => {
   }
 };
 
-export const removePetId = (petId) => {
+export const RemovePetId = (petId) => {
   const savedPetIds = localStorage.getItem('saved_pets')
     ? JSON.parse(localStorage.getItem('saved_pets'))
     : null;
