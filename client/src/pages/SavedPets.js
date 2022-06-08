@@ -4,6 +4,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from "../utils/queries";
 import { REMOVE_PET } from "../utils/mutations";
+import { removePetId } from '../utils/localStorage'
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -20,7 +21,7 @@ const SavedPets = () => {
     }
 
     try {
-      const { data } = await removePetId({
+      const { data } = await removePet({
         variables: { petId }
       });
 

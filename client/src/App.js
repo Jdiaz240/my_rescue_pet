@@ -8,7 +8,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './pages/home.css'
 import './components/Nav/index.css'
 
 import SavedPets from './pages/SavedPets';

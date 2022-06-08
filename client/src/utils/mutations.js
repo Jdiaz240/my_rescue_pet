@@ -50,8 +50,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const REMOVE_PET = gql`
-  mutation removePetId($petId: ID!) {
-    removePetId(petId: $petId) {
+  mutation removePet($petId: ID!) {
+    removePet(petId: $petId) {
       _id
       username
       email
