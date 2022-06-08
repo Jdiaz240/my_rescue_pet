@@ -1,0 +1,135 @@
+// import React, { useState, useEffect } from 'react';
+// import { useMutation } from '@apollo/client';
+// import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
+
+// import Auth from '../utils/auth';
+// // import { searchPets } from '../utils/API';
+// // import { savePetIds, getSavedPetIds } from '../utils/localStorage';
+// import { SAVE_MY_PET } from '../utils/mutations';
+
+// const MyPets = () => {
+//   // create state for holding our search field data
+//   const [petName, setPetName] = useState('');
+//   const [petDescription, setPetDescription] = useState('');
+
+//   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
+//   const [saveMyPet, { error }] = useMutation(SAVE_MY_PET);
+
+//   // create method to search for books and set state on form submit
+//   const handleFormSubmit = async (event) => {
+//     event.preventDefault();
+
+//     if (!petName || !petDescription) {
+//       return false;
+//     }
+
+//     // get token
+//     const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+//     if (!token) {
+//         return false;
+//     }
+
+//     try {
+//         const petToSave = {
+//             name: petName,
+//             description: petDescription
+//         };
+
+//         const { data } = await saveMyPet({
+//             variables: { newPet: { ...petToSave } },
+//         });
+
+//     } catch (err) {
+//         console.error(err);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Jumbotron fluid className='text-light bg-dark'>
+//         <Container>
+//           <h4>Find your next best friend!</h4>
+//           <Form onSubmit={handleFormSubmit}>
+//             <Row>
+//               <Col xs={5}>
+//                 <Form.Control
+//                   name='petName'
+//                   value={petName}
+//                   onChange={(e) => setPetName(e.target.value)}
+//                   type='text'
+//                   size='lg'
+//                   placeholder='Pet name'
+//                 />
+//                  </Col>
+//                  <Col>
+//                 <Form.Control
+//                   name='petDescription'
+//                   value={petDescription}
+//                   onChange={(e) => setPetDescription(e.target.value)}
+//                   type='text'
+//                   size='lg'
+//                   placeholder='Pet description'
+//                 />
+//               </Col>
+//               <Col xs={10} md={4}>
+//                 <Button type='submit' variant='success' size='lg'>
+//                   Save pet
+//                 </Button>
+//               </Col>
+//             </Row>
+//           </Form>
+//         </Container>
+//       </Jumbotron>
+
+//       {/* <Container>
+//         <h2>
+//           {searchedPets.length
+//             ? `Viewing ${searchedPets.length} results:`
+//             : 'Search for a pet to begin'}
+//         </h2>
+//         <CardColumns>
+//           {searchedPets.map((animal) => {
+//             return (
+//               <Card key={animal.animalId} border='dark'>
+//                 {animal.photo ? (
+//                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
+//                 ) : null}
+//                 <Card.Body>
+//                   <Card.Title bg='light'>{animal.name}</Card.Title>
+//                   <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
+//                   <Card.Subtitle className="mb-2 text-muted">Pet type: {animal.type} </Card.Subtitle>
+//                   <Card.Text>
+//                     <ul>
+//                       <li>
+//                       {animal.status}
+//                       </li>
+//                       <li>
+//                       {animal.age}
+//                       </li>
+//                       <li>
+//                       {animal.age}
+//                       </li>
+//                     </ul>
+//                     </Card.Text>
+//                   {Auth.loggedIn() && (
+//                     <Button
+//                       disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}
+//                       className='btn-block btn-info'
+//                       onClick={() => handleSavePet(animal.petId)}>
+//                       {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
+//                         ? 'This pet has already been saved!'
+//                         : 'Save this Pet!'}
+//                     </Button>
+//                   )}
+//                 </Card.Body>
+//               </Card>
+//             );
+//           })}
+//         </CardColumns>
+//       </Container> */}
+//     </>
+//   );
+// };
+
+// export default MyPets;

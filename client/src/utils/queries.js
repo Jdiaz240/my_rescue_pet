@@ -7,13 +7,19 @@ export const GET_ME = gql`
       _id
       username
       email
-      SavedPets {
-        authors
-        description  
+      savedPets {
         petId
-        image
-        link
-        title
+        name
+        photo
+        status
+        breed
+        description
+        age
+        contact
+        phone
+        gender
+        address
+        type
       }
     }
   }

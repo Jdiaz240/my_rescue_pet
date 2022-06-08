@@ -24,11 +24,17 @@ export const SAVE_PET = gql`
       email
       SavedPets {
           petId
-          authors
-          image
-          link
-          title
+          name
+          photo
+          status
+          breed
           description
+          age
+          contact
+          phone
+          gender
+          address
+          type
       }
     }
   }
@@ -52,13 +58,19 @@ export const REMOVE_PET = gql`
       _id
       username
       email
-      SavedPets {
-          authors
-          description
-          petId
-          image
-          title
-          link
+      savedPets {
+        petId
+        name
+        photo
+        status
+        breed
+        description
+        age
+        contact
+        phone
+        gender
+        address
+        type
       }
     }
   }

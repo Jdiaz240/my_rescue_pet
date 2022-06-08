@@ -2,7 +2,6 @@ import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-// import { removePetId } from '../utils/localStorage';
 import { GET_ME } from "../utils/queries";
 import { REMOVE_PET } from "../utils/mutations";
 
@@ -54,7 +53,7 @@ const SavedPets = () => {
           {userData.savedPets.map((pet) => {
             return (
               <Card key={pet.petId} border='dark'>
-                {pet.image ? <Card.Img src={pet.image} alt={`The cover for ${pet.title}`} variant='top' /> : null}
+                {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{pet.title}</Card.Title>
                   <p className='small'>User: {pet.users}</p>
