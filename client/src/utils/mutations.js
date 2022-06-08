@@ -14,12 +14,12 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_PET = gql`
-  mutation SavePet($newPet: InputPet!) {
-    SavePet(newPet: $newPet) {
+  mutation savePet($newPet: InputPet!) {
+    savePet(newPet: $newPet) {
       _id
       username
       email
-      SavePet {
+      savedPets {
           petId
           name
           photo

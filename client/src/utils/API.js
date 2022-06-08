@@ -31,7 +31,7 @@ export const loginUser = (userData) => {
 
 
 
-// save book data for a logged in user
+// save pet data for a logged in user
 export const savePet = (petData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
@@ -43,7 +43,7 @@ export const savePet = (petData, token) => {
   });
 };
 
-// remove saved book data for a logged in user
+// remove saved pet data for a logged in user
 export const deletePet = (petId, token) => {
   return fetch(`/api/users/pets/${petId}`, {
     method: 'DELETE',

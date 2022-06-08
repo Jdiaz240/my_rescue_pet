@@ -3,12 +3,13 @@ import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from "../utils/queries";
+import { RemovePetId } from '../utils/localStorage';
 import { REMOVE_PET } from "../utils/mutations";
 import { removePetId } from '../utils/localStorage'
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removePetId, {error}] = useMutation(REMOVE_PET)
+  const [removePet, {error}] = useMutation(REMOVE_PET)
   const userData = data?.me || {};
 
 
@@ -26,7 +27,7 @@ const SavedPets = () => {
       });
 
       // upon success, remove book's id from localStorage
-      removePetId(petId);
+      RemovePetId(petId);
     } catch (err) {
       console.error(err);
     }
