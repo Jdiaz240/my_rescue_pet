@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
 // import { searchPets } from '../utils/API';
@@ -125,7 +125,7 @@ const SearchPets = () => {
               <Col xs={10} md={4}>
                 <Button type='submit' variant='success' size='lg'>
                   Submit Search
-                </Button>
+                </Button>                
               </Col>
             </Row>
           </Form>
@@ -133,7 +133,7 @@ const SearchPets = () => {
       </Jumbotron>
 
       <Container>
-        <h2>
+        <h2 className='searchTitle'>
           {searchedPets.length
             ? `Viewing ${searchedPets.length} results:`
             : 'Search for a pet to begin'}
@@ -141,7 +141,7 @@ const SearchPets = () => {
         <CardColumns>
           {searchedPets.map((animal) => {
             return (
-              <Card  key={animal.animalId} border='dark'>
+              <Card key={animal.animalId} className='resultBody'>
                 {animal.photo ? (
                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
                 ) : null}
@@ -150,17 +150,10 @@ const SearchPets = () => {
                   <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
                   <Card.Subtitle className="mb-2 text-muted">Pet type: {animal.type} </Card.Subtitle>
                   <Card.Text>
-                    <ul>
-                      <li>
-                      {animal.status}
-                      </li>
-                      <li>
-                      {animal.age}
-                      </li>
-                      <li>
-                      {animal.age}
-                      </li>
-                    </ul>
+                   <ListGroup variant="flush">
+                     <ListGroupItem>{animal.status}</ListGroupItem>
+                     <ListGroupItem>{animal.age}</ListGroupItem>
+                   </ListGroup>
                     </Card.Text>
                   {Auth.loggedIn() && (
                     <Button

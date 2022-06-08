@@ -14,7 +14,7 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar bg='light' variant='light' expand='lg'>
-        <Container fluid>
+        <Container fluid className='navbar'>
           <Navbar.Brand as={Link} to='/'>
             <img
               src={logo} />

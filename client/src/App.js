@@ -8,10 +8,12 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './pages/home.css'
+import './components/Nav/index.css'
 
-import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
+import SearchPets from './pages/SearchPets'
 import Footer from './components/Footer/index'
 
 
@@ -45,7 +47,7 @@ function App() {
         
           <Route 
             path='/' 
-            element={<SearchPets />} 
+            element={<Home />} 
           />
           <Route 
             path='/saved' 
