@@ -52,7 +52,7 @@ const SavedPets = () => {
         <CardColumns>
           {userData.savedPets.map((pet) => {
             return (
-              <Card key={pet.petId} border='dark'>
+              <Card key={pet.petId}>
                 {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{pet.title}</Card.Title>

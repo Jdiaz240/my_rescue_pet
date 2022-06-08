@@ -13,16 +13,13 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_MY_PET = gql`
-  mustation saveMyPet`
-
 export const SAVE_PET = gql`
-  mutation SavedPets($newPet: InputPet!) {
-    SavedPets(newPet: $newPet) {
+  mutation SavePet($newPet: InputPet!) {
+    SavePet(newPet: $newPet) {
       _id
       username
       email
-      SavedPets {
+      SavePet {
           petId
           name
           photo
