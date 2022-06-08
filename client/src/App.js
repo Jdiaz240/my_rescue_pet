@@ -12,7 +12,7 @@ import './components/Nav/index.css'
 
 import SavedPets from './pages/SavedPets';
 import Navbar from './components/Nav';
-import Home from './pages/Home'
+import SearchPets from './pages/SearchPets'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
