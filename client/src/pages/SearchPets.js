@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row } from 'react-bootstrap';
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
 // import { searchPets } from '../utils/API';
@@ -20,8 +20,7 @@ const SearchPets = () => {
   // create state to hold saved petId values
   const [savedPetIds, setSavedPetIds] = useState(getSavedPetIds());
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  // set up useEffect hook to save `savedPetIds` list to localStorage on component unmount
   useEffect(() => {
     return () => savePetIds(savedPetIds);
   });
@@ -46,31 +45,17 @@ const SearchPets = () => {
        const animals = resp.data.animals;
        console.log(animals);
 
-// response.body example:
-
-// age: "Young"
-// breeds: {primary: 'Pit Bull Terrier', secondary: 'Mixed Breed', mixed: true, unknown: false}
- //checkbox for mixed or purebred
-// contact: {email: null, phone: '(602) 506-2765', address: {postcode}}}
-// gender: "Male"
-// id: 55818720
-// name: "MODELO"
-// primary_photo_cropped: {medium}
-// published_at: "2022-06-06T03:18:48+0000"
-// size: "Large"
-// species: "Dog"
-// status: "adoptable"
-// -- status_changed_at: "2022-06-06T03:18:48+0000"
-// url: "https://www.petfinder.com/dog/modelo-55818720/az//mcacc-west-valley-anphoeniximal-care-center-az101/?referrer_id=a7470fa8-2969-44b7-871d-1a91742d448c"
-// [[Prototype]]: Object
-
-// iterate over results and create array of hashes (objects) that match model attributes
-
       const animalData = animals.map((animal) => ({
-        petId: animal.id,
+        petId: `${animal.id}`,
         breed: animal.breeds.primary,
         type: animal.type,
         name: animal.name,
+        contact: animal.contact ? animal.contact.email : null,
+        phone: animal.contact ? animal.contact.phone : null,
+        address: animal.contact.postcode,
+        gender: animal.gender,
+        status: animal.status,
+        age: animal.age,
         description: animal.description,
         photo: animal.primary_photo_cropped ? animal.primary_photo_cropped.small : null,
       }));
@@ -89,6 +74,7 @@ const SearchPets = () => {
   const handleSavePet = async (petId) => {
     // find the book in `searchedPets` state by the matching id
     const petToSave = searchedPets.find((pet) => pet.petId === petId);
+    console.log(petToSave);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -150,27 +136,40 @@ const SearchPets = () => {
         <h2>
           {searchedPets.length
             ? `Viewing ${searchedPets.length} results:`
-            : 'Search for a book to begin'}
+            : 'Search for a pet to begin'}
         </h2>
         <CardColumns>
           {searchedPets.map((animal) => {
             return (
-              <Card key={animal.animalId} border='dark'>
+              <Card  key={animal.animalId} border='dark'>
                 {animal.photo ? (
                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{animal.name}</Card.Title>
-                  <p className='small'>Authors: {animal.authors}</p>
-                  <Card.Text>{animal.description}</Card.Text>
+                  <Card.Title bg='light'>{animal.name}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">Pet type: {animal.type} </Card.Subtitle>
+                  <Card.Text>
+                    <ul>
+                      <li>
+                      {animal.status}
+                      </li>
+                      <li>
+                      {animal.age}
+                      </li>
+                      <li>
+                      {animal.age}
+                      </li>
+                    </ul>
+                    </Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}
                       className='btn-block btn-info'
                       onClick={() => handleSavePet(animal.petId)}>
                       {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
+                        ? 'This pet has already been saved!'
+                        : 'Save this Pet!'}
                     </Button>
                   )}
                 </Card.Body>

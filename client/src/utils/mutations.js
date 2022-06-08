@@ -14,18 +14,24 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_PET = gql`
-  mutation savedPets($newPet: InputPet!) {
-    savedPets(newPet: $newPet) {
+  mutation savePet($newPet: InputPet!) {
+    savePet(newPet: $newPet) {
       _id
       username
       email
       savedPets {
           petId
-          authors
-          image
-          link
-          title
+          name
+          photo
+          status
+          breed
           description
+          age
+          contact
+          phone
+          gender
+          address
+          type
       }
     }
   }
@@ -50,12 +56,18 @@ export const REMOVE_PET = gql`
       username
       email
       savedPets {
-          authors
-          description
-          petId
-          image
-          title
-          link
+        petId
+        name
+        photo
+        status
+        breed
+        description
+        age
+        contact
+        phone
+        gender
+        address
+        type
       }
     }
   }
