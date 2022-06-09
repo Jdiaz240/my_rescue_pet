@@ -42,3 +42,9 @@ body {
     font-size: 40px;
    color:#FB607F
 }
+
+.carousel {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
