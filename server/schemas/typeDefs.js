@@ -41,6 +41,37 @@ const typeDefs = gql`
     userId: String
   }
 
+  type PetForAdoption {
+    _id: ID!
+    name: String
+    photo: String
+    status: String
+    breed: String
+    description: String
+    age: String
+    contact: String
+    phone: String
+    gender: String
+    address: String
+    type: String
+    user: String
+  }
+
+  input InputPetForAdoption {
+    photo: String
+    name: String
+    status: String
+    breed: String
+    description: String
+    age: String
+    contact: String
+    phone: String
+    gender: String
+    address: String
+    type: String
+    user: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -49,6 +80,7 @@ const typeDefs = gql`
   type Query {
     users: [User]!
     user(userId: ID!): User
+    myPetsForAdoption: [PetForAdoption]
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: User
   }
@@ -59,6 +91,9 @@ const typeDefs = gql`
 
     savePet(newPet: InputPet!): User
     removePet(petId: ID!): User
+
+    savePetForAdoption(newPetForAdoption: InputPetForAdoption!): PetForAdoption
+    updatePetForAdoption(petId: ID!, name: String, Description: String): PetForAdoption
   }
 `;
 

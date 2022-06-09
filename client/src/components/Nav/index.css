@@ -1,3 +1,37 @@
 .navbar {
   margin: 0%;
 }
+
+.logo {
+  size: 10px;
+  width: 60%;
+  cursor: pointer;
+}
+
+.navbar-style {
+  justify-content:space-between;
+  padding: 20px 10px;
+}
+
+.navbar-style:hover {
+  border-bottom: 3px solid #FB607F;
+  padding-bottom: 1.75px;
+}
+
+.donate-btn {
+  background-color: #FB607F;
+  border: none;
+  margin-left: 15px;
+}
+.donate-btn:hover {
+  opacity: 0.9;
+  background-color: hsl(48, 93%, 53%);
+  border: none;
+}
+.donate-btn.active {
+  opacity: 0.9;
+  background-color: hsl(48, 93%, 53%) !important;
+  border: none;
+}
+
+

@@ -4,6 +4,7 @@ import { Navbar, Nav, Container, Modal, Tab, Button } from 'react-bootstrap';
 import SignUpForm from '../SignupForm';
 import LoginForm from '../LoginForm';
 import logo from '../../assets/project3_logo.png';
+import './index.css';
 
 import Auth from '../../utils/auth';
 
@@ -13,30 +14,33 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='light' variant='light' expand='lg'>
+      <Navbar variant='light' expand='lg'>
         <Container fluid className='navbar'>
           <Navbar.Brand as={Link} to='/'>
-            <img
+            <img className='logo'
               src={logo} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>
             <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/search'>
-                Search For Pets
+              <Nav.Link className='navbar-style' as={Link} to='/search'>
+                SEARCH PETS
               </Nav.Link>
               {/* if user is logged in show favorite pets and logout */}
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See your dashboard
+                  <Nav.Link className='navbar-style' as={Link} to='/saved'>
+                    MY FAVORITE
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link className='navbar-style' as={Link} to='/petsforadoption'>
+                    ADD PET FOR ADOPTION
+                  </Nav.Link>
+                  <Nav.Link className='navbar-style' onClick={Auth.logout}>LOGOUT</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link className='navbar-style' onClick={() => setShowModal(true)}>LOGIN/SIGN UP</Nav.Link>
               )}
-              <Nav.Link as={Link} to='/Donate'><Button variant="warning">Donate</Button></Nav.Link>
+              <Nav.Link as={Link} to='/donation'><Button size="lg" className='donate-btn'>DONATE</Button></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -58,7 +62,6 @@ const AppNavbar = () => {
                 <Nav.Item>
                   <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
                 </Nav.Item>
-
               </Nav>
             </Modal.Title>
           </Modal.Header>

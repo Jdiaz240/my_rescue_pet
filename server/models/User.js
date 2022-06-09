@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 // import schema from Pet.js
 const petSchema = require('./Pet');
-const rehomeSchema = require('./Rehome');
 
 const userSchema = new Schema(
   {
@@ -24,13 +23,6 @@ const userSchema = new Schema(
     },
     // set savedPets to be an array of data that adheres to the petSchema
     savedPets: [petSchema],
-    rehome: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Rehome",
-      }
-    ]
-    // rehomePets: [rehomeSchema],
   },
   // set this to use virtual below
   {

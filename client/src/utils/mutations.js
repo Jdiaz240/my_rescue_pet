@@ -14,8 +14,8 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_PET = gql`
-  mutation savedPets($newPet: InputPet!) {
-    savedPets(newPet: $newPet) {
+  mutation savePet($newPet: InputPet!) {
+    savePet(newPet: $newPet) {
       _id
       username
       email
@@ -72,3 +72,29 @@ export const REMOVE_PET = gql`
     }
   }
 `;
+
+export const SAVE_PET_FOR_ADOPTION = gql`
+  mutation savePetForAdoption($newPetForAdoption: InputPetForAdoption!) {
+    savePetForAdoption(newPetForAdoption: $newPetForAdoption) {
+      name
+      photo
+      status
+      breed
+      description
+      age
+      contact
+      phone
+      gender
+      address
+      type
+    }
+  }
+`;
+
+// export const UPDATE_PET_FOR_ADOPTIONUpdatePetForAdoption($petId: ID!, $name: String, $description: String) {
+//   updatePetForAdoption(petId: $petId, name: $name, Description: $description) {
+//     _id
+//     name
+//     description
+//   }
+// }

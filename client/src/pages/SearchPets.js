@@ -8,7 +8,7 @@ import { savePetIds, getSavedPetIds } from '../utils/localStorage';
 import { SAVE_PET } from '../utils/mutations';
 
 const petfinder = require("@petfinder/petfinder-js");
-const client = new petfinder.Client({apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT"});
+const client = new petfinder.Client({ apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT" });
 
 const SearchPets = () => {
   // create state for holding returned google api data
@@ -42,29 +42,29 @@ const SearchPets = () => {
         location: searchLocation,
         limit: 25,
       }).then(resp => {
-       const animals = resp.data.animals;
-       console.log(animals);
+        const animals = resp.data.animals;
+        console.log(animals);
 
-      const animalData = animals.map((animal) => ({
-        petId: `${animal.id}`,
-        breed: animal.breeds.primary,
-        type: animal.type,
-        name: animal.name,
-        contact: animal.contact ? animal.contact.email : null,
-        phone: animal.contact ? animal.contact.phone : null,
-        address: animal.contact.postcode,
-        gender: animal.gender,
-        status: animal.status,
-        age: animal.age,
-        description: animal.description,
-        photo: animal.primary_photo_cropped ? animal.primary_photo_cropped.small : null,
-      }));
+        const animalData = animals.map((animal) => ({
+          petId: `${animal.id}`,
+          breed: animal.breeds.primary,
+          type: animal.type,
+          name: animal.name,
+          contact: animal.contact ? animal.contact.email : null,
+          phone: animal.contact ? animal.contact.phone : null,
+          address: animal.contact.postcode,
+          gender: animal.gender,
+          status: animal.status,
+          age: animal.age,
+          description: animal.description,
+          photo: animal.primary_photo_cropped ? animal.primary_photo_cropped.small : null,
+        }));
 
 
         setSearchedPets(animalData);
         setSearchType('');
         setSearchLocation('');
-      });      
+      });
     } catch (err) {
       console.error(err);
     }
@@ -87,7 +87,6 @@ const SearchPets = () => {
       const { data } = await savePet({
         variables: { newPet: { ...petToSave } },
       });
-
       // if book successfully saves to user's account, save book id to state
       setSavedPetIds([...savedPetIds, petToSave.petId]);
     } catch (err) {
@@ -97,9 +96,14 @@ const SearchPets = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Container className="justify-content-md-center" >
+        <>
+          <h4 className='title-style'>Start your search and find your next best friend</h4>
+          <p className='parragraph-style'>Find dogs, cats, birds, rabbits, etc. near you</p>
+        </>
+      </Container>
+      <Jumbotron className='text-light bg-dark'>
         <Container>
-          <h4>Find your next best friend!</h4>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={5}>
@@ -111,8 +115,8 @@ const SearchPets = () => {
                   size='lg'
                   placeholder='Search for a pet type'
                 />
-                 </Col>
-                 <Col>
+              </Col>
+              <Col>
                 <Form.Control
                   name='searchLocation'
                   value={searchLocation}
@@ -125,7 +129,7 @@ const SearchPets = () => {
               <Col xs={10} md={4}>
                 <Button type='submit' variant='success' size='lg'>
                   Submit Search
-                </Button>                
+                </Button>
               </Col>
             </Row>
           </Form>
@@ -135,8 +139,8 @@ const SearchPets = () => {
       <Container>
         <h2 className='searchTitle'>
           {searchedPets.length
-            ? `Viewing ${searchedPets.length} results:`
-            : 'Search for a pet to begin'}
+            ? `Viewing ${searchedPets.length} results`
+            : 'Login or sign up to save your favorite pet '}
         </h2>
         <CardColumns>
           {searchedPets.map((animal) => {
@@ -150,11 +154,11 @@ const SearchPets = () => {
                   <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
                   <Card.Subtitle className="mb-2 text-muted">Pet type: {animal.type} </Card.Subtitle>
                   <Card.Text>
-                   <ListGroup variant="flush">
-                     <ListGroupItem>{animal.status}</ListGroupItem>
-                     <ListGroupItem>{animal.age}</ListGroupItem>
-                   </ListGroup>
-                    </Card.Text>
+                    <ListGroup variant="flush">
+                      <ListGroupItem>Status: {animal.status}</ListGroupItem>
+                      <ListGroupItem>Age: {animal.age}</ListGroupItem>
+                    </ListGroup>
+                  </Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}

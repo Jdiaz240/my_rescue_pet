@@ -23,6 +23,7 @@ const rehomeSchema = new Schema({
     phone: String,
   },
   age: { type: String },
+  //change breed to species: { primary: String }
   breed: {
     primary: String,
   },

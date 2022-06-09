@@ -6,17 +6,23 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./components/Nav/index.css";
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './components/Nav/index.css'
 
-import Home from "./pages/Home";
-import SearchPets from "./pages/SearchPets";
-import SavedPets from "./pages/SavedPets";
-import Navbar from "./components/Nav";
-import Donate from "./Donation/Donate";
-import Footer from "./components/Footer/index";
+import Home from './pages/Home';
+import SearchPets from './pages/SearchPets';
+import SavedPets from './pages/SavedPets';
+import PetsForAdoption from './pages/PetsForAdoption';
+import EditPetForAdoption from './pages/EditPetForAdoption';
+import Navbar from './components/Nav';
+import Footer from './components/Footer/index';
+import Donation from "./components/Donation";
+import Header from './components/Header';
+import SearchOrganization from "./pages/SearchOrganization";
+
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -44,15 +50,39 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Navbar />
+        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<SearchPets />} />
-          <Route path="/saved" element={<SavedPets />} />
-          <Route path="/Donate" element={<Donate />} />
-
           <Route
-            path="*"
-            element={<h1 className="display-2">Wrong page!</h1>}
+            path='/'
+            element={<Home />}
+          />
+          <Route
+            path='/search'
+            element={<SearchPets />}
+          />
+          <Route
+            path='/saved'
+            element={<SavedPets />}
+          />
+          <Route
+            path='/petsforadoption'
+            element={<PetsForAdoption />}
+          />
+          <Route
+            path='/petsforadoption/edit/:petForAdoptionId'
+            element={<EditPetForAdoption />}
+          />
+          <Route
+            path='/donation'
+            element={<Donation />}
+          />
+          <Route
+            path='/organizations'
+            element={<SearchOrganization />}
+          />
+          <Route
+            path='*'
+            element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
         <Footer />
