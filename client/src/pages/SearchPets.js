@@ -87,7 +87,6 @@ const SearchPets = () => {
       const { data } = await savePet({
         variables: { newPet: { ...petToSave } },
       });
-
       // if book successfully saves to user's account, save book id to state
       setSavedPetIds([...savedPetIds, petToSave.petId]);
     } catch (err) {
