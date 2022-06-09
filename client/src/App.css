@@ -77,6 +77,12 @@ body {
   background-size: cover;
 }
 
+.carousel {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* using a mobile-first approach, use `min-width` values going from narrow -> wide for a responsive design */
 @media screen and (max-width: 850px) {
 
@@ -84,6 +90,4 @@ body {
     height: 150px;
     background-size: cover;
   }
-
-
 }
