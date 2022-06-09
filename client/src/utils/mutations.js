@@ -90,3 +90,11 @@ export const SAVE_PET_FOR_ADOPTION = gql`
     }
   }
 `;
+
+// export const UPDATE_PET_FOR_ADOPTIONUpdatePetForAdoption($petId: ID!, $name: String, $description: String) {
+//   updatePetForAdoption(petId: $petId, name: $name, Description: $description) {
+//     _id
+//     name
+//     description
+//   }
+// }
