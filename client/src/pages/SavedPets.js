@@ -41,7 +41,7 @@ const SavedPets = () => {
   return (
     <>
       <Container className="justify-content-md-center" >
-        <h6 className='title-style'>Are you ready to adopt a pet?</h6>
+        <h6 className='title-style'>Ready to adopt?</h6>
       </Container>
       <Container>
         <h2>

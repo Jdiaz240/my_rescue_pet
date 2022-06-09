@@ -9,7 +9,7 @@
 }
 
 body {
-  height: 250vh;
+  height: 180vh;
 }
 
 .title-style {
@@ -72,7 +72,8 @@ body {
 .banner-image {
   background-image: url("./assets/header6.png");
   height: 380px;
-  border-bottom: 10px solid #FB607F;
+  border-bottom: 5px solid #FB607F;
+  box-shadow: 10px 10px 10px 10px rgba(61, 58, 58, 0.422) inset;
   margin-bottom: 20px;
   background-size: cover;
 }

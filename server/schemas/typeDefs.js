@@ -93,6 +93,7 @@ const typeDefs = gql`
     removePet(petId: ID!): User
 
     savePetForAdoption(newPetForAdoption: InputPetForAdoption!): PetForAdoption
+    updatePetForAdoption(petId: ID!, name: String, Description: String): PetForAdoption
   }
 `;
 
