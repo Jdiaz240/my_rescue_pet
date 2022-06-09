@@ -16,30 +16,9 @@ const Home = () => {
     <>
       <Container className="justify-content-md-center" >
         <>
-          <h4 className='title-style'>Start your search here</h4>
-          <p className='parragraph-style'>Find hundreds of pets, shelters or quick pet adoptions in your area.</p>
+          <h4 className='title-style'>Easy adopt pets</h4>
         </>
       </Container>
-      <Row className="justify-content-md-center">
-        <Col sm={3}>
-          <Link to="/search">
-            <PetIcon />
-            <p>Find your next best friend</p>
-          </Link>
-        </Col>
-        <Col sm={3}>
-          <Link to="/organizations">
-            <ShelterIcon />
-            <p>Find a shelter near by</p>
-          </Link>
-        </Col>
-        <Col sm={3}>
-          <Link to="/search">
-            <PetIcon />
-            <p>Find your next best friend</p>
-          </Link>
-        </Col>
-      </Row>
       <Carousel>
         <Carousel.Item interval={1000}>
           <img
@@ -91,7 +70,7 @@ const Home = () => {
           </Link>
         </Col>
         <Col sm={2}>
-          <Link to="/search">
+          <Link to="/organizations">
             <ShelterIcon />
             <p>Find a shelter near by</p>
           </Link>
