@@ -83,6 +83,14 @@ body {
   margin-right: auto;
 }
 
+.gitLink {
+  border-radius: 15px;
+  background-color: #66B032;
+  color: white;
+  margin: 0% 3%;
+  padding: .5%;
+}
+
 /* using a mobile-first approach, use `min-width` values going from narrow -> wide for a responsive design */
 @media screen and (max-width: 850px) {
 
