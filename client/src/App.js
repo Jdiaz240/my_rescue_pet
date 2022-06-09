@@ -18,7 +18,7 @@ import PetsForAdoption from './pages/PetsForAdoption';
 import EditPetForAdoption from './pages/EditPetForAdoption';
 import Navbar from './components/Nav';
 import Footer from './components/Footer/index';
-import Donate from "./donation";
+import Donation from "./components/Donation";
 import Header from './components/Header';
 
 
@@ -73,7 +73,7 @@ function App() {
           />
           <Route
             path='/donation'
-            element={<Donate />}
+            element={<Donation />}
           />
           <Route
             path='*'

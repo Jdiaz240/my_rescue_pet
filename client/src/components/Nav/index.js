@@ -40,7 +40,7 @@ const AppNavbar = () => {
               ) : (
                 <Nav.Link className='navbar-style' onClick={() => setShowModal(true)}>LOGIN/SIGN UP</Nav.Link>
               )}
-              <Nav.Link as={Link} to='/donate'><Button className='donate-btn'>DONATE</Button></Nav.Link>
+              <Nav.Link as={Link} to='/donation'><Button className='donate-btn'>DONATE</Button></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
