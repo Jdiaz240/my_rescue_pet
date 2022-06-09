@@ -40,15 +40,13 @@ const SavedPets = () => {
 
   return (
     <>
-      <Jumbotron fluid id='jumbo1' className='text-light'>
-        <Container>
-          <h1 >Viewing saved pets!</h1>
-        </Container>
-      </Jumbotron>
+      <Container className="justify-content-md-center" >
+        <h6 className='title-style'>Are you ready to adopt a pet?</h6>
+      </Container>
       <Container>
         <h2>
           {userData.savedPets.length
-            ? `Viewing ${userData.savedPets.length} saved ${userData.savedPets.length === 1 ? 'pet' : 'pets'}:`
+            ? `You have saved ${userData.savedPets.length} ${userData.savedPets.length === 1 ? 'pet' : 'pets'}`
             : 'You have no saved pets!'}
         </h2>
         <CardColumns>

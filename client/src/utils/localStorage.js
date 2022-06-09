@@ -28,3 +28,34 @@ export const RemovePetId = (petId) => {
 
   return true;
 };
+
+export const getSavedPetForAdoptionIds = () => {
+  const savedPetIds = localStorage.getItem('saved_pets_for_adoption')
+    ? JSON.parse(localStorage.getItem('saved_pets_for_adoption'))
+    : [];
+
+  return savedPetIds;
+};
+
+export const savePetForAdoptionIds = (petIdArr) => {
+  if (petIdArr.length) {
+    localStorage.setItem('saved_pets_for_adoption', JSON.stringify(petIdArr));
+  } else {
+    localStorage.removeItem('saved_pets_for_adoption');
+  }
+};
+
+export const RemovePetForAdoptionId = (petId) => {
+  const savedPetIds = localStorage.getItem('saved_pets_for_adoption')
+    ? JSON.parse(localStorage.getItem('saved_pets_for_adoption'))
+    : null;
+
+  if (!savedPetIds) {
+    return false;
+  }
+
+  const updatedSavedPetIds = savedPetIds?.filter((savedPetId) => savedPetId !== petId);
+  localStorage.setItem('saved_pets_for_adoption', JSON.stringify(updatedSavedPetIds));
+
+  return true;
+};
