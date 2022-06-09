@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Jumbotron, Container, CardColumns, Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from "../utils/queries";
@@ -9,7 +9,7 @@ import { removePetId } from '../utils/localStorage'
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removePet, {error}] = useMutation(REMOVE_PET)
+  const [removePet, { error }] = useMutation(REMOVE_PET)
   const userData = data?.me || {};
 
 
@@ -59,7 +59,14 @@ const SavedPets = () => {
                 <Card.Body>
                   <Card.Title >{pet.title}</Card.Title>
                   <p className='small'>User: {pet.users}</p>
-                  <Card.Text>{pet.description}</Card.Text>
+                  <Card.Text>
+                    <ListGroup variant="flush">
+                      <ListGroupItem>{pet.type}</ListGroupItem>
+                      <ListGroupItem>{pet.breed}</ListGroupItem>
+                      <ListGroupItem>{pet.age}</ListGroupItem>
+                      <ListGroupItem>{pet.description}</ListGroupItem>
+                    </ListGroup>
+                  </Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>
                     Delete this Pet!
                   </Button>

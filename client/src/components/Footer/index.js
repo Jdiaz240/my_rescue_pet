@@ -6,6 +6,7 @@ import {
 } from 'mdb-react-ui-kit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
+import { Nav } from 'react-bootstrap';
 
 
 
@@ -16,13 +17,16 @@ export default function Footer() {
         <section className='mb-4'>
         
        <a className='icon' href='https://github.com/Jdiaz240/my_rescue_pet'>
-       <FontAwesomeIcon icon={faGithubSquare} className='icons' />
+       <FontAwesomeIcon icon={faGithubSquare} className='icons' />Repository gitLink
        </a>
         </section>
       </MDBContainer>
 
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        Created By: Evelyn Frech, Joshua Diaz, Edwin Toro-Garcia, and Stephanie Chaparro-Roldan
+      <a className='gitLink' href='https://github.com/Jdiaz240'>Joshua Diaz </a>
+      <a className='gitLink' href='https://github.com/efrech'>Evelyn Frech </a>
+      <a className='gitLink' href='https://github.com/schaparro08'>Stephanie Chaparro-Roldan </a>
+      <a className='gitLink' href='https://github.com/EJTG1961'>Edwin Toro-Garcia </a>
       </div>
     </MDBFooter>
   );
