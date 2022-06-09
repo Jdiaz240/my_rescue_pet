@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Jumbotron, Container, Button } from 'react-bootstrap';
+import { Container, Button, Row, Col } from 'react-bootstrap';
 import PetIcon from '../components/petIcon'
 import ShelterIcon from '../components/shelterIcon';
 
@@ -14,20 +14,32 @@ import ShelterIcon from '../components/shelterIcon';
 const Home = () => {
     return (
         <>
-            <Jumbotron fluid className='text-light bg-dark'>
-                <Container>
-                    <h4>Start your rescue pet search here.</h4>
-                    <p>Find hundreds of pets, shelters or quick pet adoptions in your area.</p>
-                </Container>
-            </Jumbotron>
-            <Link to="/search">
-                <PetIcon />
-                Find your next best friend
-            </Link>
-            <Link to="/search">
-                <ShelterIcon />
-                Find a shelter near by
-            </Link>
+            <Container className="justify-content-md-center" >
+                <>
+                    <h4 className='title-style'>Start your search here</h4>
+                    <p className='parragraph-style'>Find hundreds of pets, shelters or quick pet adoptions in your area.</p>
+                </>
+            </Container>
+            <Row className="justify-content-md-center">
+                <Col sm={3}>
+                    <Link to="/search">
+                        <PetIcon />
+                        <p>Find your next best friend</p>
+                    </Link>
+                </Col>
+                <Col sm={3}>
+                    <Link to="/search">
+                        <ShelterIcon />
+                        <p>Find a shelter near by</p>
+                    </Link>
+                </Col>
+                <Col sm={3}>
+                    <Link to="/search">
+                        <PetIcon />
+                        <p>Find your next best friend</p>
+                    </Link>
+                </Col>
+            </Row>
         </>
     );
 };

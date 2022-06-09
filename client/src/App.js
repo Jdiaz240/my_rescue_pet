@@ -14,8 +14,11 @@ import './components/Nav/index.css'
 import Home from './pages/Home';
 import SearchPets from './pages/SearchPets';
 import SavedPets from './pages/SavedPets';
+import PetsForAdoption from './pages/PetsForAdoption';
+import EditPetForAdoption from './pages/EditPetForAdoption';
 import Navbar from './components/Nav';
-import Footer from './components/Footer/index'
+import Footer from './components/Footer/index';
+import Header from './components/Header';
 
 
 const httpLink = createHttpLink({
@@ -44,6 +47,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
         <Navbar />
+        <Header />
         <Routes>
         
           <Route 
@@ -57,6 +61,14 @@ function App() {
           <Route 
             path='/saved' 
             element={<SavedPets />} 
+          />
+          <Route 
+            path='/petsforadoption' 
+            element={<PetsForAdoption />} 
+          />
+          <Route 
+            path='/petsforadoption/edit/:petForAdoptionId' 
+            element={<EditPetForAdoption />} 
           />
           
           <Route 

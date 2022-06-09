@@ -1,44 +1,89 @@
-.icon-style{
-    background-color: white;
-    width: 20%;
+.icon-style {
+  text-decoration: none;
+  width: 60%;
+  font-size: 10px;
+  transition: all .5s ease-in-out;
+  margin: 15px;
+  padding: 10px;
+  align-items: center;
 }
 
 body {
-    font-family: 'Rubik', sans-serif;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Rubik Mono One', sans-serif;
-  }
-  
-  .small {
-    font-weight: 300;
-    font-style: italic;
-  }
+  height: 180vh;
+}
+
+.title-style {
+  margin: 45px;
+  color: #66B032;
+  font-size: 40px;
+  text-align: center;
+}
+
+.parragraph-style {
+  font-size: 20px;
+  text-align: center;
+}
+
+.small {
+  font-weight: 300;
+  font-style: italic;
+}
+
 .saved-cards {
-    box-shadow: 10px 10px 10px grey;
-    
- 
+  box-shadow: 10px 10px 10px grey;
+
+
 }
 
 #jumbo1 {
-    background-color: #66B032 !important;
-    border-top: 5px solid #FB607F;
-    border-bottom: 5px solid #FB607F;
-  
+  background-color: #66B032 !important;
+  border-top: 5px solid #FB607F;
+  border-bottom: 5px solid #FB607F;
+
 }
 
 #footer-main {
-    background-color: #66B032 !important ;
-    border-top: 5px solid #FB607F;
+  background-color: #343a40 !important;
+  border-top: 4px solid #FB607F;
 }
 
+
 .icons {
-    font-size: 40px;
-   color:#FB607F
+  font-size: 30px;
+  color: hsl(48, 93%, 53%);
+  padding: 4px;
+  margin-top: 5px;
+}
+
+.icons:hover {
+  opacity: 0.8;
+  color: #66B032;
+}
+
+.footer-style {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  font-size: 15px;
+}
+
+.banner-image {
+  background-image: url("./assets/header6.png");
+  height: 380px;
+  border-bottom: 10px solid #FB607F;
+  margin-bottom: 20px;
+  background-size: cover;
+}
+
+/* using a mobile-first approach, use `min-width` values going from narrow -> wide for a responsive design */
+@media screen and (max-width: 850px) {
+
+  .banner-image {
+    height: 150px;
+    background-size: cover;
+  }
+
+
 }
