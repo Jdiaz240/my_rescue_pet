@@ -28,7 +28,7 @@ const Home = () => {
           </Link>
         </Col>
         <Col sm={3}>
-          <Link to="/search">
+          <Link to="/organizations">
             <ShelterIcon />
             <p>Find a shelter near by</p>
           </Link>
