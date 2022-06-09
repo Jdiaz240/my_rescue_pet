@@ -1,10 +1,11 @@
 import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Jumbotron, Container, CardColumns, Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { GET_ME } from "../utils/queries";
 import { RemovePetId } from '../utils/localStorage';
 import { REMOVE_PET } from "../utils/mutations";
+
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -52,11 +53,17 @@ const SavedPets = () => {
           {userData.savedPets.map((pet) => {
             return (
               <Card id='space1' className="saved-cards" key={pet.petId} border='dark'>
-                {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
+                {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.name}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title >{pet.name}</Card.Title>
-                  <p className='small'>Breed: {pet.breed}</p>
-                  <Card.Text>{pet.description}</Card.Text>
+                  <Card.Title className='text-center'>{pet.name}</Card.Title>
+                  <Card.Text>
+                    <ListGroup variant="flush" className='text-center'>
+                      <Card.Subtitle className="mb-2 text-muted">Pet Type: {pet.type}</Card.Subtitle>
+                      <Card.Subtitle className="mb-2 text-muted">Breed: {pet.breed}</Card.Subtitle>
+                      <ListGroupItem>Age: {pet.age}</ListGroupItem>
+                      <ListGroupItem>Description: {pet.description}</ListGroupItem>
+                    </ListGroup>
+                  </Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>
                     Delete this Pet!
                   </Button>
