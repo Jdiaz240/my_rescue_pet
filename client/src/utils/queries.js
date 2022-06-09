@@ -24,3 +24,23 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_MY_PETS_FOR_ADOPTION = gql`
+  query myPetsForAdoption {
+    myPetsForAdoption {
+      _id
+      name
+      photo
+      status
+      breed
+      description
+      age
+      contact
+      phone
+      gender
+      address
+      type
+      user
+    }
+  }
+`;

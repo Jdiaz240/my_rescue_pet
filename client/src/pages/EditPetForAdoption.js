@@ -1,19 +1,28 @@
 // import React, { useState, useEffect } from 'react';
-// import { useMutation } from '@apollo/client';
+// import { useQuery, useMutation } from '@apollo/client';
 // import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
 
 // import Auth from '../utils/auth';
 // // import { searchPets } from '../utils/API';
-// // import { savePetIds, getSavedPetIds } from '../utils/localStorage';
-// import { SAVE_MY_PET } from '../utils/mutations';
+// import { SAVE_PET_FOR_ADOPTION } from '../utils/mutations';
+// import { Link } from 'react-router-dom';
 
-// const MyPets = () => {
+// const EditPetForAdoption = () => {
 //   // create state for holding our search field data
 //   const [petName, setPetName] = useState('');
 //   const [petDescription, setPetDescription] = useState('');
 
+//   // create state to hold saved petId values
+//   const [savedPetForAdoptionIds, setSavedPetForAdoptionIds] = useState(getSavedPetForAdoptionIds());
+
+//   useEffect(() => {
+//     return () => savePetForAdoptionIds(savedPetForAdoptionIds);
+//   });
+
 //   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-//   const [saveMyPet, { error }] = useMutation(SAVE_MY_PET);
+//   const [savePetForAdoption, { error }] = useMutation(SAVE_PET_FOR_ADOPTION);
+//   const { loading, data } = useQuery(GET_MY_PETS_FOR_ADOPTION);
+//   const petsForAdoptionData = data?.myPetsForAdoption || [];
 
 //   // create method to search for books and set state on form submit
 //   const handleFormSubmit = async (event) => {
@@ -36,8 +45,8 @@
 //             description: petDescription
 //         };
 
-//         const { data } = await saveMyPet({
-//             variables: { newPet: { ...petToSave } },
+//         const { data } = await savePetForAdoption({
+//             variables: { newPetForAdoption: { ...petToSave } },
 //         });
 
 //     } catch (err) {
@@ -82,14 +91,14 @@
 //         </Container>
 //       </Jumbotron>
 
-//       {/* <Container>
+//       <Container>
 //         <h2>
-//           {searchedPets.length
-//             ? `Viewing ${searchedPets.length} results:`
-//             : 'Search for a pet to begin'}
+//           {petsForAdoptionData.length
+//             ? `Viewing ${petsForAdoptionData.length} results:`
+//             : 'Add a pet to begin'}
 //         </h2>
 //         <CardColumns>
-//           {searchedPets.map((animal) => {
+//           {petsForAdoptionData.map((animal) => {
 //             return (
 //               <Card key={animal.animalId} border='dark'>
 //                 {animal.photo ? (
@@ -113,23 +122,18 @@
 //                     </ul>
 //                     </Card.Text>
 //                   {Auth.loggedIn() && (
-//                     <Button
-//                       disabled={savedPetIds?.some((savedPetId) => savedPetId === animal.petId)}
-//                       className='btn-block btn-info'
-//                       onClick={() => handleSavePet(animal.petId)}>
-//                       {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
-//                         ? 'This pet has already been saved!'
-//                         : 'Save this Pet!'}
-//                     </Button>
+//                     <Link as={Link} to={'/petsforadoption/edit/'+animal._id}>
+//                         Edit this pet
+//                     </Link>
 //                   )}
 //                 </Card.Body>
 //               </Card>
 //             );
 //           })}
 //         </CardColumns>
-//       </Container> */}
+//       </Container>
 //     </>
 //   );
 // };
 
-// export default MyPets;
+// export default EditPetForAdoption;

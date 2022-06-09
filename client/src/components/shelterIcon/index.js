@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchShelterIcon from '../../assets/iconshelter copy.png'
+import SearchShelterIcon from '../../assets/shelter.png'
 
 function ShelterIcon() {
     return (

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Donate.css";
 // import "./styles/tailwind-pre-build.css";
 import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(
@@ -24,7 +23,7 @@ const DonationButton = ({ itemID, ammount }) => {
   };
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+      className="donate-btn"
       onClick={handleClick}
     >
       Donate {ammount}$
@@ -34,7 +33,7 @@ const DonationButton = ({ itemID, ammount }) => {
 export default function App() {
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+      <div>
         <DonationButton
           ammount={"$5.00"}
           itemID="price_1IUx1FJ2iOysJZvP1LD3EzTR"
@@ -58,4 +57,4 @@ export default function App() {
       </div>
     </>
   );
-}
+};

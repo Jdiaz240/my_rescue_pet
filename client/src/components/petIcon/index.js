@@ -1,9 +1,9 @@
 import React from 'react';
-import SearchPetIcon from '../../assets/iconpet.png'
+import SearchPetIcon from '../../assets/search.png'
 
 function PetIcon() {
     return (
-        <img class="icon-style" src={SearchPetIcon} alt="pet icon"/>
+        <img className="icon-style" src={SearchPetIcon} alt="pet icon"/>
     )
 }
 

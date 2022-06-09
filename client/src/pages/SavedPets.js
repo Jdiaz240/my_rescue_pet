@@ -8,7 +8,7 @@ import { REMOVE_PET } from "../utils/mutations";
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removePet, {error}] = useMutation(REMOVE_PET)
+  const [removePet, { error }] = useMutation(REMOVE_PET)
   const userData = data?.me || {};
 
 
@@ -39,15 +39,13 @@ const SavedPets = () => {
 
   return (
     <>
-      <Jumbotron fluid id='jumbo1' className='text-light'>
-        <Container>
-          <h1 >Viewing saved pets!</h1>
-        </Container>
-      </Jumbotron>
+      <Container className="justify-content-md-center" >
+        <h6 className='title-style'>Are you ready to adopt a pet?</h6>
+      </Container>
       <Container>
         <h2>
           {userData.savedPets.length
-            ? `Viewing ${userData.savedPets.length} saved ${userData.savedPets.length === 1 ? 'pet' : 'pets'}:`
+            ? `You have saved ${userData.savedPets.length} ${userData.savedPets.length === 1 ? 'pet' : 'pets'}`
             : 'You have no saved pets!'}
         </h2>
         <CardColumns>
@@ -56,8 +54,8 @@ const SavedPets = () => {
               <Card id='space1' className="saved-cards" key={pet.petId} border='dark'>
                 {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.title}`} variant='top' /> : null}
                 <Card.Body>
-                  <Card.Title >{pet.title}</Card.Title>
-                  <p className='small'>User: {pet.users}</p>
+                  <Card.Title >{pet.name}</Card.Title>
+                  <p className='small'>Breed: {pet.breed}</p>
                   <Card.Text>{pet.description}</Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>
                     Delete this Pet!
