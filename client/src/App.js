@@ -20,6 +20,7 @@ import Navbar from './components/Nav';
 import Footer from './components/Footer/index';
 import Donation from "./components/Donation";
 import Header from './components/Header';
+import SearchOrganization from "./pages/SearchOrganization";
 
 
 
@@ -74,6 +75,10 @@ function App() {
           <Route
             path='/donation'
             element={<Donation />}
+          />
+          <Route
+            path='/organizations'
+            element={<SearchOrganization />}
           />
           <Route
             path='*'
