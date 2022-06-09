@@ -89,6 +89,20 @@ console.log(newPetForAdoption);
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    updatePetForAdoption: async (parent, { newPetForAdoption }, context) => {
+      console.log("resolver: savePetForAdoption");
+            if (context.user) {
+              newPetForAdoption.user = context.user._id;
+      console.log(newPetForAdoption);
+              const petForAdoption = await PetForAdoption.findOneAndUpdate(
+                { _id: newPetForAdoption._id },
+                { petName: newPetForAdoption.name, petDescription: newPetForAdoption.description, petContact: newPetForAdoption.contact,  },
+                { new: true });
+      
+              return petForAdoption;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+          },
   },
 };
 
