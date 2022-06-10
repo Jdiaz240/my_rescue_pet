@@ -1,4 +1,6 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import './index.css';
 // import "./styles/tailwind-pre-build.css";
 import { loadStripe } from "@stripe/stripe-js";
 import { Container } from "react-bootstrap";
