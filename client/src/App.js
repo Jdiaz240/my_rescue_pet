@@ -13,6 +13,7 @@ import './components/Nav/index.css'
 
 import Home from './pages/Home';
 import SearchPets from './pages/SearchPets';
+import SearchPetsForAdoption from './pages/SearchPetsForAdoption';
 import SavedPets from './pages/SavedPets';
 import PetsForAdoption from './pages/PetsForAdoption';
 import EditPetForAdoption from './pages/EditPetForAdoption';
@@ -59,6 +60,10 @@ function App() {
           <Route
             path='/search'
             element={<SearchPets />}
+          />
+          <Route
+            path='/searchpetsforadoption'
+            element={<SearchPetsForAdoption />}
           />
           <Route
             path='/saved'

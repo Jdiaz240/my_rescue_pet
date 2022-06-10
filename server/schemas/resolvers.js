@@ -19,6 +19,18 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    getAllPetsForAdoption: async () => {
+      return PetForAdoption.find();
+    },
+
+    petForAdoption: async (parent, { petForAdoptionId }) => {
+      return PetForAdoption.findOne({ _id: petForAdoptionId });
+    },
+
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
+    },
+
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
@@ -78,10 +90,8 @@ const resolvers = {
     },
 
     savePetForAdoption: async (parent, { newPetForAdoption }, context) => {
-console.log("resolver: savePetForAdoption");
       if (context.user) {
         newPetForAdoption.user = context.user._id;
-console.log(newPetForAdoption);
         const petForAdoption = await PetForAdoption.create(newPetForAdoption);
 
         return petForAdoption;
@@ -89,20 +99,17 @@ console.log(newPetForAdoption);
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updatePetForAdoption: async (parent, { newPetForAdoption }, context) => {
-      console.log("resolver: savePetForAdoption");
-            if (context.user) {
-              newPetForAdoption.user = context.user._id;
-      console.log(newPetForAdoption);
-              const petForAdoption = await PetForAdoption.findOneAndUpdate(
-                { _id: newPetForAdoption._id },
-                { petName: newPetForAdoption.name, petDescription: newPetForAdoption.description, petContact: newPetForAdoption.contact,  },
-                { new: true });
-      
-              return petForAdoption;
-            }
-            throw new AuthenticationError('You need to be logged in!');
-          },
+    updatePetForAdoption: async (parent, { petForAdoptionId, name, description, type, contact, phone, address, age, breed }, context) => {
+      if (context.user) {
+        const updatedPetForAdoption = await PetForAdoption.findByIdAndUpdate(
+          { _id: petForAdoptionId },
+          { name: name, description: description, type: type, contact: contact, phone: phone, address: address, age: age, breed: breed },
+          { new: true });
+
+        return updatedPetForAdoption;
+      }
+        throw new AuthenticationError('You need to be logged in!');
+      },
   },
 };
 

@@ -26,6 +26,9 @@ const AppNavbar = () => {
               <Nav.Link className='navbar-style' as={Link} to='/search'>
                 SEARCH PETS
               </Nav.Link>
+              <Nav.Link className='navbar-style' as={Link} to='/searchpetsforadoption'>
+                BROWSE EASY ADOPTION PETS
+              </Nav.Link>
               {/* if user is logged in show favorite pets and logout */}
               {Auth.loggedIn() ? (
                 <>

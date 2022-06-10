@@ -1,15 +1,44 @@
 .icon-style {
   text-decoration: none;
-  width: 60%;
+  width: 70%;
   font-size: 10px;
   transition: all .5s ease-in-out;
-  margin: 15px;
-  padding: 10px;
-  align-items: center;
+  margin: 12px;
+}
+
+.icon-style-home {
+  font-size: 45px;
+  color: #FB607F;
+}
+
+Form {
+  border:2px solid #343a4041;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.home-search-icon {
+  display: flex;
+  font-size: 200px;
+  transition: all .5s ease-in-out;
+  margin: 10px;
+  text-align: center;
+  color: hsl(48, 93%, 53%);
+  border: solid 10px #66B032;
+  padding: 5px;
+}
+.submit-btn {
+  padding: 5px;
+  margin: 5px;
+}
+
+.search-fontawesome {
+  font-size: 18px;
+  padding-left: 10px;
 }
 
 body {
-  height: 180vh;
+  height: 350vh;
 }
 
 .title-style {
@@ -20,8 +49,9 @@ body {
 }
 
 .parragraph-style {
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .small {
@@ -85,18 +115,59 @@ body {
 }
 
 .gitLink {
-  border-radius: 15px;
-  background-color: #66B032;
-  color: white;
+  /* border-radius: 15px;
+  background-color: #66B032; */
+  color: #66B032;
+  font-size: 22px;
   margin: 0% 3%;
   padding: .5%;
 }
 
+a {
+  color: #66B032;
+  padding: 10px;
+  text-align: center;
+}
+
+.a-size {
+  font-size: 30px;
+}
+
+a:hover {
+  color: #FB607F;
+}
+
+.card-title {
+  font-size: 22px;
+  color:#343a40;
+}
+
+.donate-btn-page {
+  color:#343a40;
+  background-color: hsl(48, 93%, 53%);
+  display: flexbox;
+  align-items: center;
+  padding: 10px;
+  margin-right: 70px;
+  margin-left: 70px;
+
+}
 /* using a mobile-first approach, use `min-width` values going from narrow -> wide for a responsive design */
 @media screen and (max-width: 850px) {
 
   .banner-image {
     height: 150px;
     background-size: cover;
+  }
+  .home-search-icon {
+    display: block;
+    font-size: 200px;
+    transition: all .5s ease-in-out;
+    margin: 10px;
+    text-align: center;
+    color: #343a40;
+    border: solid 2px #66B032;
+    border-radius: 20%;
+
   }
 }

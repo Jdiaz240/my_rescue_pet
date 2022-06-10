@@ -91,10 +91,22 @@ export const SAVE_PET_FOR_ADOPTION = gql`
   }
 `;
 
-// export const UPDATE_PET_FOR_ADOPTIONUpdatePetForAdoption($petId: ID!, $name: String, $description: String) {
-//   updatePetForAdoption(petId: $petId, name: $name, Description: $description) {
-//     _id
-//     name
-//     description
-//   }
-// }
+export const UPDATE_PET_FOR_ADOPTION = gql`
+  mutation updatePetForAdoption($petForAdoptionId: ID!, $name: String, $description: String, $type: String, $contact: String, $phone: String, $address: String, $age: String, $breed: String) {
+    updatePetForAdoption(petForAdoptionId: $petForAdoptionId, name: $name, description: $description, type: $type, contact: $contact, phone: $phone, address: $address, age: $age, breed: $breed) {
+      _id
+      name
+      photo
+      status
+      breed
+      description
+      age
+      contact
+      phone
+      gender
+      address
+      type
+      user
+    }
+  }
+`;
