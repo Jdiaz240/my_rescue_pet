@@ -1,139 +1,146 @@
-// import React, { useState, useEffect } from 'react';
-// import { useQuery, useMutation } from '@apollo/client';
-// import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { Jumbotron, Container, Col, Form, Button, Card, CardColumns, Row, Subtitle } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
 
-// import Auth from '../utils/auth';
-// // import { searchPets } from '../utils/API';
-// import { SAVE_PET_FOR_ADOPTION } from '../utils/mutations';
-// import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
+import { UPDATE_PET_FOR_ADOPTION } from '../utils/mutations';
+import { GET_PET_FOR_ADOPTION } from '../utils/queries';
+import { Link } from 'react-router-dom';
 
-// const EditPetForAdoption = () => {
-//   // create state for holding our search field data
-//   const [petName, setPetName] = useState('');
-//   const [petDescription, setPetDescription] = useState('');
+const EditPetForAdoption = () => {
+  // create state for holding our search field data
+  const params = useParams();
 
-//   // create state to hold saved petId values
-//   const [savedPetForAdoptionIds, setSavedPetForAdoptionIds] = useState(getSavedPetForAdoptionIds());
+  const [updatePetForAdoption, { error }] = useMutation(UPDATE_PET_FOR_ADOPTION);
+  const { loading, data } = useQuery(GET_PET_FOR_ADOPTION, { variables: { petForAdoptionId: params.petForAdoptionId } });
+  const petForAdoptionData = data?.petForAdoption || [];
 
-//   useEffect(() => {
-//     return () => savePetForAdoptionIds(savedPetForAdoptionIds);
-//   });
+  // create method to search for books and set state on form submit
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    // if (!petName || !petDescription) {
+    //   return false;
+    // }
 
-//   //Use the Apollo useMutation() Hook to execute the SAVE_BOOK mutation in the handleSaveBook() function instead of the saveBook() function imported from the API file.
-//   const [savePetForAdoption, { error }] = useMutation(SAVE_PET_FOR_ADOPTION);
-//   const { loading, data } = useQuery(GET_MY_PETS_FOR_ADOPTION);
-//   const petsForAdoptionData = data?.myPetsForAdoption || [];
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-//   // create method to search for books and set state on form submit
-//   const handleFormSubmit = async (event) => {
-//     event.preventDefault();
+    if (!token) {
+      return false;
+    }
 
-//     if (!petName || !petDescription) {
-//       return false;
-//     }
+    try {
+      const petToSave = {
+        petForAdoptionId: petForAdoptionData._id,
+        name: event.target.elements.petName.value,
+        description: event.target.elements.petDescription.value,
+        type: event.target.elements.petType.value,
+        contact: event.target.elements.petContact.value,
+        phone: event.target.elements.petPhone.value,
+        address: event.target.elements.petAddress.value,
+        age: event.target.elements.petAge.value,
+        breed: event.target.elements.petBreed.value,
+      };
 
-//     // get token
-//     const token = Auth.loggedIn() ? Auth.getToken() : null;
+      const { data } = await updatePetForAdoption({
+        variables: { ...petToSave },
+      });
 
-//     if (!token) {
-//         return false;
-//     }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-//     try {
-//         const petToSave = {
-//             name: petName,
-//             description: petDescription
-//         };
+  return (
+    <>
+      <Container>
+        <h4> Editing {petForAdoptionData.name}</h4>
+        <Form onSubmit={handleFormSubmit} className='bg-light text-dark'>
+          <Row className="mb-3">
+            <Form.Group as={Col}>
+              <Form.Label>Pet Name</Form.Label>
+              <Form.Control
+                name='petName'
+                defaultValue={petForAdoptionData.name}
+                type='text'
+                size='lg'
+                placeholder='Pet name'
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group as={Col}>
+              <Form.Label>Pet type</Form.Label>
+              <Form.Control
+                name='petType'
+                type='text'
+                size='lg'
+                defaultValue={petForAdoptionData.type}
+              ></Form.Control>
+            </Form.Group>
+            </Row>
+            <Form.Group className='mb-3'>
+              <Form.Label>Pet Description</Form.Label>
+              <Form.Control
+                name='petDescription'
+                type='text'
+                size='lg'
+                defaultValue={petForAdoptionData.description}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group className='mb-3'>
+            <Form.Label>Age</Form.Label>
+            <Form.Control
+              name='petAge'
+              type='text'
+              size='lg'
+              defaultValue={petForAdoptionData.age}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Breed</Form.Label>
+            <Form.Control
+              name='petBreed'
+              type='text'
+              size='lg'
+              defaultValue={petForAdoptionData.breed}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              name='petContact'
+              type='text'
+              size='lg'
+              defaultValue={petForAdoptionData.contact}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              name='petPhone'
+              type='text'
+              size='lg'
+              defaultValue={petForAdoptionData.phone}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group className='mb-3'>
+            <Form.Label>ZipCode</Form.Label>
+            <Form.Control
+              name='petAddress'
+              type='text'
+              size='lg'
+              defaultValue={petForAdoptionData.address}
+            ></Form.Control>
+          </Form.Group>
+            <Col xs={10} md={4}>
+              <Button type='submit' variant='success' size='lg'>
+                Update pet
+              </Button>
+            </Col>
+        </Form>
+      </Container>
+    </>
+  );
+};
 
-//         const { data } = await savePetForAdoption({
-//             variables: { newPetForAdoption: { ...petToSave } },
-//         });
-
-//     } catch (err) {
-//         console.error(err);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Jumbotron fluid className='text-light bg-dark'>
-//         <Container>
-//           <h4>Find your next best friend!</h4>
-//           <Form onSubmit={handleFormSubmit}>
-//             <Row>
-//               <Col xs={5}>
-//                 <Form.Control
-//                   name='petName'
-//                   value={petName}
-//                   onChange={(e) => setPetName(e.target.value)}
-//                   type='text'
-//                   size='lg'
-//                   placeholder='Pet name'
-//                 />
-//                  </Col>
-//                  <Col>
-//                 <Form.Control
-//                   name='petDescription'
-//                   value={petDescription}
-//                   onChange={(e) => setPetDescription(e.target.value)}
-//                   type='text'
-//                   size='lg'
-//                   placeholder='Pet description'
-//                 />
-//               </Col>
-//               <Col xs={10} md={4}>
-//                 <Button type='submit' variant='success' size='lg'>
-//                   Save pet
-//                 </Button>
-//               </Col>
-//             </Row>
-//           </Form>
-//         </Container>
-//       </Jumbotron>
-
-//       <Container>
-//         <h2>
-//           {petsForAdoptionData.length
-//             ? `Viewing ${petsForAdoptionData.length} results:`
-//             : 'Add a pet to begin'}
-//         </h2>
-//         <CardColumns>
-//           {petsForAdoptionData.map((animal) => {
-//             return (
-//               <Card key={animal.animalId} border='dark'>
-//                 {animal.photo ? (
-//                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
-//                 ) : null}
-//                 <Card.Body>
-//                   <Card.Title bg='light'>{animal.name}</Card.Title>
-//                   <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
-//                   <Card.Subtitle className="mb-2 text-muted">Pet type: {animal.type} </Card.Subtitle>
-//                   <Card.Text>
-//                     <ul>
-//                       <li>
-//                       {animal.status}
-//                       </li>
-//                       <li>
-//                       {animal.age}
-//                       </li>
-//                       <li>
-//                       {animal.age}
-//                       </li>
-//                     </ul>
-//                     </Card.Text>
-//                   {Auth.loggedIn() && (
-//                     <Link as={Link} to={'/petsforadoption/edit/'+animal._id}>
-//                         Edit this pet
-//                     </Link>
-//                   )}
-//                 </Card.Body>
-//               </Card>
-//             );
-//           })}
-//         </CardColumns>
-//       </Container>
-//     </>
-//   );
-// };
-
-// export default EditPetForAdoption;
+export default EditPetForAdoption;

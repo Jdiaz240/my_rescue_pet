@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import './index.css';
 // import "./styles/tailwind-pre-build.css";
 import { loadStripe } from "@stripe/stripe-js";
+import { Container } from "react-bootstrap";
 const stripePromise = loadStripe(
   "pk_test_51IUqMCJ2iOysJZvP3vrQpEoV2l1SpF9PzkycqVdKjmC3RYuDC3AqTvRfBDcsDwDmtxJlkUyip4GQOb8Akt0lF3O100RSHVPfch"
 );
@@ -25,16 +26,19 @@ const DonationButton = ({ itemID, ammount }) => {
   };
   return (
     <button
-      className="donate-btn"
+      className="donate-btn-page"
       onClick={handleClick}
     >
-      Donate {ammount}$
+      Donate {ammount}
     </button>
   );
 };
 export default function App() {
   return (
     <>
+    <Container className="title-style">
+      <h2>Your donations are important!!</h2>
+    </Container>
       <div>
         <DonationButton
           ammount={"$5.00"}

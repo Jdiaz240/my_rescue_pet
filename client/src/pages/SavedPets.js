@@ -5,7 +5,7 @@ import Auth from '../utils/auth';
 import { GET_ME } from "../utils/queries";
 import { RemovePetId } from '../utils/localStorage';
 import { REMOVE_PET } from "../utils/mutations";
-
+import PetPlaceholder from '../components/petPlaceholder';
 
 const SavedPets = () => {
   const { loading, data } = useQuery(GET_ME);
@@ -53,7 +53,7 @@ const SavedPets = () => {
           {userData.savedPets.map((pet) => {
             return (
               <Card id='space1' className="saved-cards" key={pet.petId} border='dark'>
-                {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.name}`} variant='top' /> : null}
+                {pet.photo ? <Card.Img src={pet.photo} alt={`The cover for ${pet.name}`} variant='top' /> : <PetPlaceholder /> }
                 <Card.Body>
                   <Card.Title className='text-center'>{pet.name}</Card.Title>
                   <Card.Text>
@@ -62,6 +62,7 @@ const SavedPets = () => {
                       <Card.Subtitle className="mb-2 text-muted">Breed: {pet.breed}</Card.Subtitle>
                       <ListGroupItem>Age: {pet.age}</ListGroupItem>
                       <ListGroupItem>Description: {pet.description}</ListGroupItem>
+                      <ListGroupItem>Contact: {pet.contact}</ListGroupItem>
                     </ListGroup>
                   </Card.Text>
                   <Button className='btn-block btn-danger' onClick={() => handleDeletePet(pet.petId)}>

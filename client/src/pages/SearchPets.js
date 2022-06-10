@@ -7,6 +7,11 @@ import Auth from '../utils/auth';
 import { savePetIds, getSavedPetIds } from '../utils/localStorage';
 import { SAVE_PET } from '../utils/mutations';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
+import PetPlaceholder from '../components/petPlaceholder';
+
 const petfinder = require("@petfinder/petfinder-js");
 const client = new petfinder.Client({ apiKey: "bTD0N7eDjIihKlcKmqHa3bzIe5O5ZxmUXInVN6YXqjmmWEiYrx", secret: "M7yzm8Hubm0dbTkHki8oVHa09SrIvvtlZaQWHsGT" });
 
@@ -99,21 +104,21 @@ const SearchPets = () => {
       <Container className="justify-content-md-center" >
         <>
           <h4 className='title-style'>Start your search and find your next best friend</h4>
-          <p className='parragraph-style'>Find dogs, cats, birds, rabbits, etc. near you</p>
+          <p className='parragraph-style'>Find hundreds of pets like dogs, cats, birds, rabbits, etc. looking for a new home in your area</p>
         </>
       </Container>
       <Jumbotron className='text-light bg-dark'>
         <Container>
           <Form onSubmit={handleFormSubmit}>
             <Row>
-              <Col xs={5}>
+              <Col xs={6}>
                 <Form.Control
                   name='searchType'
                   value={searchType}
                   onChange={(e) => setSearchType(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a pet type'
+                  placeholder='Select a pet type'
                 />
               </Col>
               <Col>
@@ -123,11 +128,11 @@ const SearchPets = () => {
                   onChange={(e) => setSearchLocation(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search in a location (city, state, postal code)'
+                  placeholder='Select a location (city, state or postal code)'
                 />
               </Col>
-              <Col xs={10} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+              <Col xs={8} md={2}>
+                <Button type='submit' variant='success' size='lg' className='submit-btn'>
                   Submit Search
                 </Button>
               </Col>
@@ -148,7 +153,7 @@ const SearchPets = () => {
               <Card key={animal.animalId} className='resultBody'>
                 {animal.photo ? (
                   <Card.Img src={animal.photo} alt={`The cover for ${animal.name}`} variant='top' />
-                ) : null}
+                ) : <PetPlaceholder /> }
                 <Card.Body>
                   <Card.Title bg='light'>{animal.name}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">Breed: {animal.breed}</Card.Subtitle>
@@ -157,6 +162,7 @@ const SearchPets = () => {
                     <ListGroup variant="flush">
                       <ListGroupItem>Status: {animal.status}</ListGroupItem>
                       <ListGroupItem>Age: {animal.age}</ListGroupItem>
+                      <ListGroupItem>Contact: {animal.contact}</ListGroupItem>
                     </ListGroup>
                   </Card.Text>
                   {Auth.loggedIn() && (
@@ -167,6 +173,7 @@ const SearchPets = () => {
                       {savedPetIds?.some((savedPetId) => savedPetId === animal.petId)
                         ? 'This pet has already been saved!'
                         : 'Save this Pet!'}
+                      <FontAwesomeIcon icon={faHeart} className='search-fontawesome'/>
                     </Button>
                   )}
                 </Card.Body>

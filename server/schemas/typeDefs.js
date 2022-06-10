@@ -81,6 +81,9 @@ const typeDefs = gql`
     users: [User]!
     user(userId: ID!): User
     myPetsForAdoption: [PetForAdoption]
+    petForAdoption(petForAdoptionId: ID!): PetForAdoption
+    getAllPetsForAdoption: [PetForAdoption]
+
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: User
   }
@@ -93,7 +96,7 @@ const typeDefs = gql`
     removePet(petId: ID!): User
 
     savePetForAdoption(newPetForAdoption: InputPetForAdoption!): PetForAdoption
-    updatePetForAdoption(petId: ID!, name: String, Description: String): PetForAdoption
+    updatePetForAdoption(petForAdoptionId: ID!, name: String, description: String, type: String, contact: String, phone: String, address: String, age: String, breed: String): PetForAdoption
   }
 `;
 
