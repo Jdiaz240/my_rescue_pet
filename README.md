@@ -45,6 +45,6 @@ My Rescue Pet also provides the users the ability to search and save different p
 
 | Description   | URL |
 | -----------   | ------ |
-| Deployed App  |  |
+| Deployed App  | https://afternoon-wave-62835.herokuapp.com/ |
 | GitHub Repo.  | https://github.com/Jdiaz240/my_rescue_pet|
 
